@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Welcome to your new TanStack Start app!
 
 # Getting Started
@@ -192,3 +193,7 @@ Loaders simplify your data fetching logic dramatically. Check out more informati
 You can learn more about all of the offerings from TanStack in the [TanStack documentation](https://tanstack.com).
 
 For TanStack Start specific documentation, visit [TanStack Start](https://tanstack.com/start).
+=======
+# jungle_gaming
+Repositório criado para o desafio frontend da Jungle Gaming
+>>>>>>> 26e1168694f40661c2dc46ca6238a43fd5674a76
