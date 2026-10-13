@@ -236,12 +236,21 @@ const nftImages = [
 
 export const nfts: INfts[] = categoryDefinitions.flatMap(
   ({ name, slug, items }) =>
-    items.map((item, index) => ({
-      id: `${slug}-${String(index + 1).padStart(3, '0')}`,
-      name: item,
-      price: (25 + ((index * 37 + slug.length * 11) % 476) + 0.99).toFixed(2),
-      imageUrl: nftImages[index % nftImages.length],
-      category: name,
-      available: index !== 7 && index !== 14,
-    })),
+    items.map((item, index) => {
+      const date = new Date('2026-10-12T12:00:00Z')
+      date.setDate(date.getDate() - index * 5)
+
+      return {
+        id: `${slug}-${String(index + 1).padStart(3, '0')}`,
+        name: item,
+        price: (0.02 + ((index * 37 + slug.length * 11) % 1499) / 100).toFixed(
+          2,
+        ),
+        imageUrl: nftImages[index % nftImages.length],
+        category: name,
+        available: index !== 7 && index !== 14,
+        createdAt: date.toISOString(),
+        isTrending: index % 3 === 0,
+      }
+    }),
 )

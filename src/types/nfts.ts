@@ -5,4 +5,6 @@ export default interface INfts {
   imageUrl: string
   category: string
   available: boolean
+  createdAt: string
+  isTrending: boolean
 }

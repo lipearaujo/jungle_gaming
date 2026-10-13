@@ -1,6 +1,11 @@
+import { useNfts } from '#/hooks/use-nfts'
 import { Button } from '@base-ui/react/button'
 
 const Hero = () => {
+  const { data: nfts } = useNfts()
+
+  const randomNft = nfts?.[Math.floor(Math.random() * (nfts.length ?? 0))]
+
   return (
     <section className="mt-8 w-full h-112.5">
       <div className="flex justify-between">
@@ -29,8 +34,8 @@ const Hero = () => {
 
         <div className="w-112.5 h-112.5 rounded-md">
           <img
-            src="/assets/NFT_artwork_01.png"
-            alt="Imagem de NFT"
+            src={randomNft?.imageUrl}
+            alt={randomNft?.name}
             width={450}
             height={450}
             className="rounded-2xl"
