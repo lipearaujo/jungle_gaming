@@ -5,12 +5,6 @@ import { Outlet, createFileRoute } from '@tanstack/react-router'
 export const Route = createFileRoute('/_app')({ component: Home })
 
 function Home() {
-  /* 
-    Services: fazem as requisições HTTP.
-    Hooks: conectam os services ao TanStack Query.
-    Componentes: consomem os dados e exibem a interface.
-  */
-
   return (
     <div className="p-8 font-mono">
       <div className="w-300 mx-auto text-[#F5F1EB]">

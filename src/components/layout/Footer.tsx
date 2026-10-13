@@ -3,7 +3,7 @@ import { Button } from '../ui/button'
 
 const Footer = () => {
   return (
-    <footer className="max-h-152.5">
+    <footer className="max-h-152.5 mt-24">
       <div className="w-full h-62.5 bg-[#241612]">
         <div className="h-full grid grid-cols-[264.67px_264.67px_264.67px_1fr] p-8 gap-4">
           <div className=" border-r border-r-[#D28A4C] flex flex-col gap-2">

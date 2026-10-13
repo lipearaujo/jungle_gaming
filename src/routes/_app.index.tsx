@@ -1,5 +1,7 @@
+import Blog from '#/components/sections/Blog'
 import Hero from '#/components/sections/Hero'
 import Products from '#/components/sections/Products'
+import Promos from '#/components/sections/Promos'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/_app/')({
@@ -16,10 +18,10 @@ function RouteComponent() {
       <Products />
 
       {/* promos section */}
-      <section></section>
+      <Promos />
 
       {/* blog section */}
-      <section></section>
+      <Blog />
     </div>
   )
 }

@@ -79,10 +79,10 @@ const NFTGrid = ({
           </NavigationMenuList>
         </NavigationMenu>
 
-        <div className="flex gap w-75 h-4.5">
-          <p className="text-[15px]">Ordenar por:</p>
+        <div className="flex items-center justify-center gap-1 w-75 h-4.5">
+          <p className="text-[15px] leading-none ">Ordenar por:</p>
           <Select items={items} defaultValue={'Listados recentemente'}>
-            <SelectTrigger className="w-full max-w-48 bg-transparent border-0">
+            <SelectTrigger className="max-w-48 bg-transparent border-0">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>

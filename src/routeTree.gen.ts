@@ -11,6 +11,8 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as AppRouteImport } from './routes/_app'
 import { Route as AppIndexRouteImport } from './routes/_app.index'
+import { Route as AppMarketRouteImport } from './routes/_app.market'
+import { Route as AppNftNftIdRouteImport } from './routes/_app.nft.$nftId'
 
 const AppRoute = AppRouteImport.update({
   id: '/_app',
@@ -21,24 +23,40 @@ const AppIndexRoute = AppIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AppRoute,
 } as any)
+const AppMarketRoute = AppMarketRouteImport.update({
+  id: '/market',
+  path: '/market',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppNftNftIdRoute = AppNftNftIdRouteImport.update({
+  id: '/nft/$nftId',
+  path: '/nft/$nftId',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof AppIndexRoute
+  '/market': typeof AppMarketRoute
+  '/nft/$nftId': typeof AppNftNftIdRoute
 }
 export interface FileRoutesByTo {
+  '/market': typeof AppMarketRoute
   '/': typeof AppIndexRoute
+  '/nft/$nftId': typeof AppNftNftIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_app': typeof AppRouteWithChildren
+  '/_app/market': typeof AppMarketRoute
   '/_app/': typeof AppIndexRoute
+  '/_app/nft/$nftId': typeof AppNftNftIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/market' | '/nft/$nftId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/_app' | '/_app/'
+  to: '/market' | '/' | '/nft/$nftId'
+  id: '__root__' | '/_app' | '/_app/market' | '/_app/' | '/_app/nft/$nftId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -61,15 +79,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppIndexRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/market': {
+      id: '/_app/market'
+      path: '/market'
+      fullPath: '/market'
+      preLoaderRoute: typeof AppMarketRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/nft/$nftId': {
+      id: '/_app/nft/$nftId'
+      path: '/nft/$nftId'
+      fullPath: '/nft/$nftId'
+      preLoaderRoute: typeof AppNftNftIdRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
 interface AppRouteChildren {
+  AppMarketRoute: typeof AppMarketRoute
   AppIndexRoute: typeof AppIndexRoute
+  AppNftNftIdRoute: typeof AppNftNftIdRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
+  AppMarketRoute: AppMarketRoute,
   AppIndexRoute: AppIndexRoute,
+  AppNftNftIdRoute: AppNftNftIdRoute,
 }
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)

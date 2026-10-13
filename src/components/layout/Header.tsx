@@ -1,9 +1,3 @@
-import {
-  NavigationMenu,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-} from '@/components/ui/navigation-menu'
 import { LogIn, Search, ShoppingCart } from 'lucide-react'
 import { Button } from '../ui/button'
 import { Link } from '@tanstack/react-router'
@@ -14,37 +8,35 @@ const Header = () => {
       <Link to="/" className="text-sm font-bold">
         KURIO
       </Link>
-      <nav className="w-100.25 h-full flex items-center justify-center">
-        <NavigationMenu className="h-full">
-          <NavigationMenuList className="h-full">
-            <NavigationMenuItem className="flex gap-9 h-full">
-              <NavigationMenuLink
-                render={<Link to="/"></Link>}
-                className="text-[16px]"
-              >
-                Início
-              </NavigationMenuLink>
-              <NavigationMenuLink
-                render={<Link to="/"></Link>}
-                className="text-[16px]"
-              >
-                Mercado
-              </NavigationMenuLink>
-              <NavigationMenuLink
-                render={<Link to="/"></Link>}
-                className="text-[16px]"
-              >
-                Criadores
-              </NavigationMenuLink>
-              <NavigationMenuLink
-                render={<Link to="/"></Link>}
-                className="text-[16px]"
-              >
-                Aprenda
-              </NavigationMenuLink>
-            </NavigationMenuItem>
-          </NavigationMenuList>
-        </NavigationMenu>
+
+      <nav className="w-100.25 h-full flex items-center justify-center gap-10">
+        <Link
+          to="/"
+          activeProps={{
+            className: 'text-[#E89B55] border-b-2 border-b-[#E89B55]',
+          }}
+          inactiveProps={{
+            className: 'text-[#F5F1EB]',
+          }}
+        >
+          Início
+        </Link>
+
+        <Link
+          to="/market"
+          activeProps={{
+            className: 'text-[#E89B55] border-b-2 border-b-[#E89B55]',
+          }}
+          inactiveProps={{
+            className: 'text-[#F5F1EB]',
+          }}
+        >
+          Mercado
+        </Link>
+
+        <span className="text-[#F5F1EB]">Criadores</span>
+
+        <span className="text-[#F5F1EB]">Aprenda</span>
       </nav>
 
       <div className="w-51.75 h-8.75 flex justify-between items-center">

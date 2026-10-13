@@ -21,7 +21,6 @@ const Sidebar = ({
   onCategoryChange,
   priceRange,
   onPriceRangeChange,
-  appliedPriceRange,
   onApplyPrice,
 }: Props) => {
   const randomNft = nfts?.[Math.floor(Math.random() * (nfts.length ?? 0))]
