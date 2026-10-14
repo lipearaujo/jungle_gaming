@@ -1,8 +1,14 @@
 import { LogIn, Search, ShoppingCart } from 'lucide-react'
 import { Button } from '../ui/button'
-import { Link } from '@tanstack/react-router'
+import { Link, useRouterState } from '@tanstack/react-router'
 
 const Header = () => {
+  const pathname = useRouterState({
+    select: (state) => state.location.pathname,
+  })
+
+  const isMarketActive = pathname === '/market' || pathname.startsWith('/nft/')
+
   return (
     <header className="flex justify-between items-center h-11.25">
       <Link to="/" className="text-sm font-bold">
@@ -24,12 +30,7 @@ const Header = () => {
 
         <Link
           to="/market"
-          activeProps={{
-            className: 'text-[#E89B55] border-b-2 border-b-[#E89B55]',
-          }}
-          inactiveProps={{
-            className: 'text-[#F5F1EB]',
-          }}
+          className={`text-base ${isMarketActive ? 'text-[#E89B55] border-b-2 border-b-[#E89B55]' : 'text-[#F5F1EB] border-0'}`}
         >
           Mercado
         </Link>

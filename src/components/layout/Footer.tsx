@@ -1,5 +1,11 @@
 import { Input } from '@/components/ui/input'
 import { Button } from '../ui/button'
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaLinkedinIn,
+  FaTwitter,
+} from 'react-icons/fa'
 
 const Footer = () => {
   return (
@@ -140,16 +146,16 @@ const Footer = () => {
                 </p>
                 <div className="flex gap-2">
                   <div className="flex items-center justify-center border border-[#D28A4C] rounded-md w-7.5 h-7.5">
-                    <img src="/assets/Facebook.png" />
+                    <FaFacebookF color="#D28A4C" />
                   </div>
                   <div className="flex items-center justify-center border border-[#D28A4C] rounded-md w-7.5 h-7.5">
-                    <img src="/assets/Instagram.png" />
+                    <FaInstagram color="#D28A4C" />
                   </div>
                   <div className="flex items-center justify-center border border-[#D28A4C] rounded-md w-7.5 h-7.5">
-                    <img src="/assets/Twitter.png" />
+                    <FaTwitter color="#D28A4C" />
                   </div>
                   <div className="flex items-center justify-center border border-[#D28A4C] rounded-md w-7.5 h-7.5">
-                    <img src="/assets/Linkedin.png" />
+                    <FaLinkedinIn color="#D28A4C" />
                   </div>
                   <div className="flex items-center justify-center border border-[#D28A4C] rounded-md w-7.5 h-7.5">
                     <img src="/assets/Union.png" />

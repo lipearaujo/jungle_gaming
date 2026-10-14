@@ -70,12 +70,9 @@ const Blog = () => {
                 <p className="text-[#CFB28C] text-[12px] font-medium leading-4">
                   {card.description}
                 </p>
-                <a
-                  href=""
-                  className="text-[#E89B55] text-[12px] font-bold leading-3.5 flex items-center gap-1"
-                >
+                <span className="cursor-pointer text-[#E89B55] text-[12px] font-bold leading-3.5 flex items-center gap-1">
                   Ler mais <MoveRight size={12} />
-                </a>
+                </span>
               </div>
             </CardContent>
           </Card>

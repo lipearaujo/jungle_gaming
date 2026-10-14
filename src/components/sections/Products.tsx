@@ -4,10 +4,12 @@ import { useState } from 'react'
 import Sidebar from '../layout/Sidebar'
 import NFTGrid from '../nfts/NFTGrid'
 import { NFTView } from '#/types/nft-view'
+import { Network } from '#/types/nfts'
 
 const Products = () => {
   const { data: categories } = useCategories()
-  const { data: nfts } = useNfts()
+  const { data: nfts, isError, isPending } = useNfts()
+
   const [selectedCategory, setSelectedCategory] = useState<string | null>(
     'Arte digital',
   )
@@ -15,6 +17,9 @@ const Products = () => {
   const [priceRange, setPriceRange] = useState([0.02, 15])
   const [appliedPriceRange, setAppliedPriceRange] = useState([0.02, 15])
   const [minPrice, maxPrice] = appliedPriceRange
+  const [selectedNetwork, setSelectedNetwork] = useState<Network>(
+    Network.ethereum,
+  )
   const [currentPage, setCurrentPage] = useState(1)
   const pageSize = 9
   const startIndex = (currentPage - 1) * pageSize
@@ -43,7 +48,11 @@ const Products = () => {
     }
   })
 
-  const sortedNfts = [...(filteredByView ?? [])].sort(
+  const filteredByNetwork = filteredByView?.filter((nft) => {
+    if (selectedNetwork === nft.network) return nft.network
+  })
+
+  const sortedNfts = [...(filteredByNetwork ?? [])].sort(
     (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
   )
 
@@ -61,6 +70,8 @@ const Products = () => {
         onPriceRangeChange={setPriceRange}
         appliedPriceRange={appliedPriceRange}
         onApplyPrice={setAppliedPriceRange}
+        selectedNetwork={selectedNetwork}
+        onNetworkChange={setSelectedNetwork}
       />
       <NFTGrid
         selectedView={selectedView}

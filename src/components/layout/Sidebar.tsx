@@ -2,6 +2,7 @@ import { Button } from '@base-ui/react/button'
 import { Slider } from '@/components/ui/slider'
 import type INfts from '#/types/nfts'
 import type ICategory from '#/types/category'
+import { Network } from '#/types/nfts'
 
 type Props = {
   nfts: INfts[]
@@ -12,6 +13,8 @@ type Props = {
   onPriceRangeChange: (range: number[]) => void
   appliedPriceRange: number[]
   onApplyPrice: (range: number[]) => void
+  selectedNetwork: string
+  onNetworkChange: (network: Network) => void
 }
 
 const Sidebar = ({
@@ -22,11 +25,14 @@ const Sidebar = ({
   priceRange,
   onPriceRangeChange,
   onApplyPrice,
+  selectedNetwork,
+  onNetworkChange,
 }: Props) => {
   const randomNft = nfts?.[Math.floor(Math.random() * (nfts.length ?? 0))]
+  const networkValues = Object.values(Network)
 
   return (
-    <aside className="w-77.5 flex flex-col">
+    <aside className="w-full flex flex-col">
       <div className="flex flex-col w-full gap-5">
         <div className="flex flex-col gap-5 bg-[#241612] p-6">
           <div>
@@ -86,18 +92,25 @@ const Sidebar = ({
             <h3 className="font-bold text-lg text-[#F5F1EB] leading-4">Rede</h3>
             <div className="p-5 flex flex-col gap-4">
               <ul className="flex flex-col gap-5">
-                <li className="flex items-center justify-between text-[#CFB28C]">
-                  Etherum
-                  <span>(119)</span>
-                </li>
-                <li className="flex items-center justify-between text-[#CFB28C]">
-                  Polygon
-                  <span>(78)</span>
-                </li>
-                <li className="flex items-center justify-between text-[#CFB28C]">
-                  Solana
-                  <span>(86)</span>
-                </li>
+                {networkValues.map((network, index) => (
+                  <li
+                    key={index}
+                    onClick={() => onNetworkChange(network)}
+                    className={`cursor-pointer flex items-center justify-between ${
+                      selectedNetwork === network
+                        ? 'text-[#E89B55]'
+                        : 'text-[#CFB28C]'
+                    }`}
+                  >
+                    {network}
+                    <span>
+                      (
+                      {nfts.filter((nft) => nft.network === network).length ??
+                        0}
+                      )
+                    </span>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
