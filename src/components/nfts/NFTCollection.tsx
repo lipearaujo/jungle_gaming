@@ -5,35 +5,24 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
 } from '@/components/ui/carousel'
 import { type CarouselApi } from '@/components/ui/carousel'
 import NFTCard from './NFTCard'
 import { Button } from '../ui/button'
-import { useCallback, useState } from 'react'
+import { useState } from 'react'
 
 type Props = {
   nft: INfts
 }
 
-type ButtonDotType = {
-  selectedIndex: number
-  scrollSnaps: number
-  onDotButtonClick: (index: number) => void
-}
-
 const NFTCollection = ({ nft }: Props) => {
-  const { data, isPending } = useNfts()
+  const { data } = useNfts()
   const [carouselApi, setCarouselApi] = useState<CarouselApi>()
   const [selectedIndex, setSelectedIndex] = useState(0)
-  const [scrollSnaps, setScrollSnaps] = useState<number[]>([])
 
   const filteredByCollection = data?.filter(
     (nfts) => nfts.collection === nft.collection && nfts.id !== nft.id,
   )
-
-  const onDotButtonClick = useCallback((index: number) => {}, [])
 
   return (
     <div className="mt-24 flex flex-col gap-8">
