@@ -31,3 +31,9 @@ export class InvalidSessionError extends AuthError {
     super(message, 401)
   }
 }
+
+export class PurchaseError extends AuthError {
+  constructor(message: string) {
+    super(message, 400)
+  }
+}

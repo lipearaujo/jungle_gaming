@@ -6,6 +6,9 @@ import NFTTabs from './tabs/NFTTabs'
 import NFTCollection from './NFTCollection'
 import { FaLinkedinIn, FaTwitter } from 'react-icons/fa'
 import { MdOutlineEmail } from 'react-icons/md'
+import useCart from '#/hooks/use-cart'
+import { Input } from '../ui/input'
+import { useState } from 'react'
 
 type Props = {
   nft: INfts
@@ -18,6 +21,8 @@ const networkSymbols: Record<Network, string> = {
 }
 
 const NFTSingleCard = ({ nft }: Props) => {
+  const { addItem } = useCart()
+  const [itemQuantity, setItemQuantity] = useState<number>(1)
   const editions = Object.values(Edition)
 
   return (
@@ -106,18 +111,35 @@ const NFTSingleCard = ({ nft }: Props) => {
             </div>
 
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-5">
-                <Button className="w-8.25 h-[49.5px] font-bold rounded-4xl cursor-pointer py-2 px-3 text-black bg-[#D28A4C]">
+              <div className="flex items-center">
+                <Button
+                  onClick={() => {
+                    setItemQuantity((prev) => (prev > 1 ? prev - 1 : 1))
+                  }}
+                  className="w-8.25 h-[49.5px] font-bold rounded-4xl cursor-pointer py-2 px-3 text-black bg-[#D28A4C]"
+                >
                   -
                 </Button>
-                <span className="text-[#F5F1EB] text-xl leading-7">1</span>
-                <Button className="w-8.25 h-[49.5px] font-bold rounded-4xl cursor-pointer py-2 px-3 text-black bg-[#D28A4C]">
+                <Input
+                  type="number"
+                  value={itemQuantity}
+                  className="text-[#F5F1EB] text-xl leading-7 bg-transparent border-0 outline-none w-10 text-center"
+                />
+                <Button
+                  onClick={() => {
+                    setItemQuantity((prev) => prev + 1)
+                  }}
+                  className="w-8.25 h-[49.5px] font-bold rounded-4xl cursor-pointer py-2 px-3 text-black bg-[#D28A4C]"
+                >
                   +
                 </Button>
               </div>
 
               <div className="flex items-center gap-2">
-                <Button className="font-bold rounded-md cursor-pointer py-2 px-3 text-black bg-[#D28A4C]">
+                <Button
+                  onClick={() => addItem(nft, itemQuantity)}
+                  className="font-bold rounded-md cursor-pointer py-2 px-3 text-black bg-[#D28A4C]"
+                >
                   COMPRAR
                 </Button>
 

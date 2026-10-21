@@ -21,6 +21,18 @@ body {
   background-color: #140d0a;
 }
 
+/* Chrome, Safari, Edge, Opera */
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
 @theme inline {
   --font-heading: var(--font-sans);
   --font-mono: 'Roboto Mono Variable', monospace;

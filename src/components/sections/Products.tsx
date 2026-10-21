@@ -8,7 +8,7 @@ import { Network } from '#/types/nfts'
 
 const Products = () => {
   const { data: categories } = useCategories()
-  const { data: nfts, isError, isPending } = useNfts()
+  const { data: nfts } = useNfts()
 
   const [selectedCategory, setSelectedCategory] = useState<string | null>(
     'Arte digital',
