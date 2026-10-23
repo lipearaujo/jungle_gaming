@@ -32,7 +32,7 @@ const Sidebar = ({
   const networkValues = Object.values(Network)
 
   return (
-    <aside className="w-full flex flex-col">
+    <aside className="flex flex-col w-77.5">
       <div className="flex flex-col w-full gap-5">
         <div className="flex flex-col gap-5 bg-[#241612] p-6">
           <div>
@@ -62,12 +62,12 @@ const Sidebar = ({
             </ul>
           </div>
 
-          <div className="flex flex-col">
+          <div className="flex flex-col gap-5">
             <h3 className="font-bold text-lg text-[#F5F1EB] leading-4">
               Faixa de preço
             </h3>
 
-            <div className="p-5 flex flex-col gap-4">
+            <div className="flex flex-col gap-4 w-full">
               <Slider
                 className="bg-[#D28A4C]"
                 value={priceRange}
@@ -76,7 +76,7 @@ const Sidebar = ({
                 max={15}
                 step={0.01}
               />
-              <span className="text-[15px] font-normal text-[#F5F1EB]">
+              <span className="text-sm font-normal text-[#F5F1EB]  w-full">
                 Preço: {priceRange.join(' - ')} ETH
               </span>
               <Button

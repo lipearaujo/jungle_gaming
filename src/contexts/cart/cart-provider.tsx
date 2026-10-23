@@ -93,6 +93,10 @@ const CartProvider = ({ children }: Props) => {
     return accumulator + Number(item.price) * item.quantity
   }, 0)
 
+  const clearCart = () => {
+    setItems([])
+  }
+
   const value: CartContextType = {
     items,
     addItem,
@@ -101,6 +105,7 @@ const CartProvider = ({ children }: Props) => {
     removeItem,
     totalItems,
     totalPrice,
+    clearCart,
   }
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>
 }

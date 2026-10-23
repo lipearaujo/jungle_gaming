@@ -1,11 +1,12 @@
 import { LogIn, Search, ShoppingCart } from 'lucide-react'
 import { Button } from '../ui/button'
 import { Link, useNavigate, useRouterState } from '@tanstack/react-router'
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
-import Form from '../auth/Form'
+import { Dialog, DialogContent } from '@/components/ui/dialog'
+
 import { useCurrentUser, useLogout } from '#/hooks/use-auth'
 import { getToken } from '#/utils/authStorage'
 import useCart from '#/hooks/use-cart'
+import Form from '../auth/Form'
 
 const linkOptions = [
   {
@@ -21,11 +22,16 @@ const Header = () => {
   const hasToken = !!getToken()
   const navigate = useNavigate()
 
-  const pathname = useRouterState({
-    select: (state) => state.location.pathname,
+  const { pathname, searchParams } = useRouterState({
+    select: (state) => ({
+      pathname: state.location.pathname,
+      searchParams: state.location.search,
+    }),
   })
 
   const isMarketActive = pathname.startsWith('/nft/')
+  const isIndexActive =
+    pathname.startsWith('/login') || pathname.startsWith('/register')
 
   return (
     <header className="flex justify-between items-center h-11.25">
@@ -41,7 +47,7 @@ const Header = () => {
             className={`text-base leading-none ${pathname === link.route ? 'text-[#E89B55] font-bold' : 'text-[#F5F1EB] font-normal'}`}
           >
             {link.name}
-            {pathname === link.route ? (
+            {pathname === link.route || isIndexActive ? (
               <div className="h-0.5 bg-[#D28A4C] relative top-3.5"></div>
             ) : (
               ''
@@ -90,20 +96,38 @@ const Header = () => {
             {isLogoutPending ? 'Saindo...' : 'Sair'}
           </Button>
         ) : (
-          <Dialog>
-            <DialogTrigger>
-              <Button
-                className="cursor-pointer w-25 text-black bg-[#D28A4C]"
-                variant="header"
-              >
-                <LogIn />
-                Entrar
-              </Button>
-            </DialogTrigger>
-            <DialogContent className="bg-[#241612] w-125 h-150 rounded-xl p-0">
-              <Form />
-            </DialogContent>
-          </Dialog>
+          <>
+            <Link
+              to="/login"
+              search={{
+                returnTo: pathname || '/',
+                redirect: '/',
+              }}
+              className="flex items-center justify-center gap-1 cursor-pointer w-25 h-8.75 text-base rounded-md text-black bg-[#D28A4C]"
+            >
+              <LogIn size={16} />
+              Entrar
+            </Link>
+
+            <Dialog
+              open={pathname === '/login' || pathname === '/register'}
+              onOpenChange={(open) => {
+                if (!open) {
+                  navigate({ to: searchParams.returnTo || '/' })
+                }
+              }}
+            >
+              <DialogContent className="bg-[#241612] w-125 h-150 rounded-xl p-0">
+                <Form
+                  pathname={pathname}
+                  searchParams={{
+                    returnTo: searchParams.returnTo ?? '/',
+                    redirect: searchParams.redirect ?? '/',
+                  }}
+                />
+              </DialogContent>
+            </Dialog>
+          </>
         )}
       </div>
     </header>

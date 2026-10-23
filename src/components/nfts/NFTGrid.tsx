@@ -40,7 +40,7 @@ const NFTGrid = ({
   onPageChange,
 }: Props) => {
   return (
-    <div className="flex flex-col gap-8 grow">
+    <div className="flex flex-col gap-8 w-full">
       <div className="flex justify-between items-center">
         <NavigationMenu className="">
           <NavigationMenuList className="">
@@ -104,53 +104,57 @@ const NFTGrid = ({
         ))}
       </div>
 
-      <div className="flex gap-2 justify-end">
-        <Button
-          type="button"
-          onClick={() => onPageChange(currentPage - 1)}
-          disabled={currentPage === 1}
-          className={`border border-[#D28A4C] w-8.75 h-8.75 rounded-md cursor-pointer flex items-center justify-center text-[#F5F1EB] font-bold text-lg 
+      {nfts.length > 0 ? (
+        <div className="flex gap-2 justify-end">
+          <Button
+            type="button"
+            onClick={() => onPageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+            className={`border border-[#D28A4C] w-8.75 h-8.75 rounded-md cursor-pointer flex items-center justify-center text-[#F5F1EB] font-bold text-lg 
               ${
                 currentPage === 1
                   ? 'opacity-40 cursor-not-allowed'
                   : 'cursor-pointer hover:bg-[#D28A4C]/20'
               }
             `}
-        >
-          <ChevronLeft />
-        </Button>
-        {Array.from({ length: totalPages }, (_, index) => index + 1).map(
-          (page) => (
-            <Button
-              key={page}
-              type="button"
-              onClick={() => onPageChange(page)}
-              className={
-                page === currentPage
-                  ? 'border border-[#D28A4C] bg-[#D28A4C] w-8.75 h-8.75 rounded-md cursor-pointer flex items-center justify-center text-[#140D0A] font-bold text-lg'
-                  : 'border border-[#D28A4C] w-8.75 h-8.75 rounded-md cursor-pointer flex items-center justify-center text-[#F5F1EB] font-bold text-lg'
-              }
-            >
-              {page}
-            </Button>
-          ),
-        )}
+          >
+            <ChevronLeft />
+          </Button>
+          {Array.from({ length: totalPages }, (_, index) => index + 1).map(
+            (page) => (
+              <Button
+                key={page}
+                type="button"
+                onClick={() => onPageChange(page)}
+                className={
+                  page === currentPage
+                    ? 'border border-[#D28A4C] bg-[#D28A4C] w-8.75 h-8.75 rounded-md cursor-pointer flex items-center justify-center text-[#140D0A] font-bold text-lg'
+                    : 'border border-[#D28A4C] w-8.75 h-8.75 rounded-md cursor-pointer flex items-center justify-center text-[#F5F1EB] font-bold text-lg'
+                }
+              >
+                {page}
+              </Button>
+            ),
+          )}
 
-        <Button
-          type="button"
-          onClick={() => onPageChange(currentPage + 1)}
-          disabled={currentPage >= totalPages}
-          className={`border border-[#D28A4C] w-8.75 h-8.75 rounded-md cursor-pointer flex items-center justify-center text-[#F5F1EB] font-bold text-lg 
+          <Button
+            type="button"
+            onClick={() => onPageChange(currentPage + 1)}
+            disabled={currentPage >= totalPages}
+            className={`border border-[#D28A4C] w-8.75 h-8.75 rounded-md cursor-pointer flex items-center justify-center text-[#F5F1EB] font-bold text-lg 
               ${
                 currentPage >= totalPages
                   ? 'opacity-40 cursor-not-allowed'
                   : 'cursor-pointer hover:bg-[#D28A4C]/20'
               }
             `}
-        >
-          <ChevronRight />
-        </Button>
-      </div>
+          >
+            <ChevronRight />
+          </Button>
+        </div>
+      ) : (
+        ''
+      )}
     </div>
   )
 }

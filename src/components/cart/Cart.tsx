@@ -9,17 +9,19 @@ import {
 } from '../ui/table'
 import { Button } from '../ui/button'
 import { Input } from '../ui/input'
-import { Link } from '@tanstack/react-router'
+import { Link, useNavigate, useRouterState } from '@tanstack/react-router'
 import CartCollection from './CartCollection'
 import useCart from '#/hooks/use-cart'
 import { useCurrentUser } from '#/hooks/use-auth'
-import { Dialog, DialogContent, DialogTrigger } from '../ui/dialog'
-import Form from '../auth/Form'
 
 const Cart = () => {
   const { data: user } = useCurrentUser()
   const { items, incrementItem, decrementItem, removeItem, totalPrice } =
     useCart()
+
+  const pathname = useRouterState({
+    select: (state) => state.location.pathname,
+  })
 
   return (
     <div className="flex flex-col gap-3 mt-8">
@@ -182,17 +184,16 @@ const Cart = () => {
               </>
             ) : (
               <>
-                <Dialog>
-                  <DialogTrigger>
-                    <Button className="text-[#140D0A] w-full font-bold text-[15px] leading-4 h-10 bg-[#D28A4C] cursor-pointer hover:bg-[#D28A4C] rounded-md flex justify-center items-center">
-                      Conectar e finalizar
-                    </Button>
-                  </DialogTrigger>
-                  <DialogContent className="bg-[#241612] w-125 h-150 rounded-xl p-0">
-                    <Form />
-                  </DialogContent>
-                </Dialog>
-
+                <Link
+                  to="/login"
+                  search={{
+                    returnTo: '/nft/cart',
+                    redirect: '/checkout',
+                  }}
+                  className="text-[#140D0A] w-full font-bold text-[15px] leading-4 h-10 bg-[#D28A4C] cursor-pointer hover:bg-[#D28A4C] rounded-md flex justify-center items-center"
+                >
+                  Conectar e finalizar
+                </Link>
                 <Link
                   to="/"
                   className="text-[#E89B55] text-[15px] leading-none text-center"

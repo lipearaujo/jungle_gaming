@@ -1,7 +1,4 @@
-import Blog from '#/components/sections/Blog'
-import Hero from '#/components/sections/Hero'
-import Products from '#/components/sections/Products'
-import Promos from '#/components/sections/Promos'
+import Home from '#/components/layout/Home'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/_app/')({
@@ -9,19 +6,5 @@ export const Route = createFileRoute('/_app/')({
 })
 
 function RouteComponent() {
-  return (
-    <div className="border-t border-t-[#D28A4C]/40">
-      {/* Hero section */}
-      <Hero />
-
-      {/* products section */}
-      <Products />
-
-      {/* promos section */}
-      <Promos />
-
-      {/* blog section */}
-      <Blog />
-    </div>
-  )
+  return <Home />
 }

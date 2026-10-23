@@ -8,9 +8,18 @@ import { useState } from 'react'
 import { Eye, EyeOff } from 'lucide-react'
 import { Button } from '../ui/button'
 import { useRegister } from '#/hooks/use-auth'
+import { useNavigate } from '@tanstack/react-router'
 
-const RegisterForm = () => {
+type Props = {
+  searchParams: {
+    returnTo: string
+    redirect: string
+  }
+}
+
+const RegisterForm = ({ searchParams }: Props) => {
   const { data: authResponse, mutate, isPending } = useRegister()
+  const navigate = useNavigate()
   const [showPassword, setShowPassword] = useState<boolean>(false)
 
   const togglePasswordInputType = () => {
@@ -27,7 +36,11 @@ const RegisterForm = () => {
   })
 
   const onSubmit = (data: z.infer<typeof registerSchema>) => {
-    mutate(data)
+    mutate(data, {
+      onSuccess: () => {
+        navigate({ to: searchParams.redirect })
+      },
+    })
   }
 
   return (

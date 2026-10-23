@@ -9,4 +9,5 @@ export interface CartContextType {
   removeItem: (nftId: string) => void
   totalItems: number
   totalPrice: number
+  clearCart: () => void
 }

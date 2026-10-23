@@ -1,38 +1,51 @@
 import RegisterForm from './RegisterForm'
 import LoginForm from './LoginForm'
 import { FaFacebookF } from 'react-icons/fa'
-import { Button } from '../ui/button'
-import { useState } from 'react'
+import { Link } from '@tanstack/react-router'
 
-type ChangeFormButtons = 'register' | 'login'
+type Props = {
+  pathname: string
+  searchParams: {
+    returnTo: string
+    redirect: string
+  }
+}
 
-const Form = () => {
-  const [changeForm, setChangeForm] = useState<ChangeFormButtons>('login')
-
+const Form = ({ pathname, searchParams }: Props) => {
   return (
-    <div className="w-full">
+    <div className="w-full border-b-10 border-b-[#D28A4C]">
       <div className="px-12 py-6">
-        <div className="flex justify-center items-center">
-          <Button
-            onClick={() => setChangeForm('login')}
-            variant="form"
-            className={`text-xl leading-4 ${changeForm === 'login' ? 'text-[#E89B55]' : ''}`}
+        <div className="flex justify-center items-center gap-3">
+          <Link
+            to="/login"
+            search={{
+              returnTo: searchParams.returnTo,
+              redirect: searchParams.redirect,
+            }}
+            className={`text-xl leading-4 ${pathname === '/login' ? 'text-[#E89B55]' : 'text-[#F5F1EB]'}`}
           >
             Entrar
-          </Button>
+          </Link>
 
           <div className="bg-[#F0805F] w-0.5 h-5"></div>
 
-          <Button
-            onClick={() => setChangeForm('register')}
-            variant="form"
-            className={`text-xl leading-4 ${changeForm === 'register' ? 'text-[#E89B55]' : ''}`}
+          <Link
+            to="/register"
+            search={{
+              returnTo: searchParams.returnTo,
+              redirect: searchParams.redirect,
+            }}
+            className={`text-xl leading-4 ${pathname === '/register' ? 'text-[#E89B55]' : 'text-[#F5F1EB]'}`}
           >
             Criar conta
-          </Button>
+          </Link>
         </div>
 
-        {changeForm === 'login' ? <LoginForm /> : <RegisterForm />}
+        {pathname === '/login' ? (
+          <LoginForm searchParams={searchParams} />
+        ) : (
+          <RegisterForm searchParams={searchParams} />
+        )}
       </div>
 
       <div className="flex justify-between items-center gap-2">

@@ -1,6 +1,5 @@
 import { useNfts } from '#/hooks/use-nfts'
 import { Card, CardContent } from '@/components/ui/card'
-import { Button } from '@base-ui/react/button'
 import { MoveRight } from 'lucide-react'
 
 const Promos = () => {
@@ -28,10 +27,10 @@ const Promos = () => {
               Colecione edições escassas diretamente dos criadores antes da
               revelação pública.
             </p>
-            <Button className="flex justify-center items-center text-sm gap-2 w-35 h-10 rounded-md cursor-pointer font-medium text-[#140D0A] bg-[#D28A4C]">
+            <div className="flex justify-center items-center text-sm gap-2 w-35 h-10 rounded-md cursor-pointer font-medium text-[#140D0A] bg-[#D28A4C]">
               Explorar
               <MoveRight />
-            </Button>
+            </div>
           </div>
         </CardContent>
       </Card>
@@ -52,10 +51,10 @@ const Promos = () => {
               Explore novos artistas, coleções verificadas e obras digitais que
               definem a cultura.
             </p>
-            <Button className="flex justify-center items-center text-sm gap-2 w-35 h-10 rounded-md cursor-pointer font-medium text-[#140D0A] bg-[#D28A4C]">
+            <div className="flex justify-center items-center text-sm gap-2 w-35 h-10 rounded-md cursor-pointer font-medium text-[#140D0A] bg-[#D28A4C]">
               Explorar
               <MoveRight />
-            </Button>
+            </div>
           </div>
         </CardContent>
       </Card>

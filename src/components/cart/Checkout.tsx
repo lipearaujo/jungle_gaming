@@ -1,4 +1,6 @@
 import useCart from '#/hooks/use-cart'
+import { useCheckout } from '#/hooks/use-checkout'
+import { useNavigate } from '@tanstack/react-router'
 import { Button } from '../ui/button'
 import { Input } from '../ui/input'
 import { Label } from '../ui/label'
@@ -22,6 +24,17 @@ const selectInputItems = [
 
 const Checkout = () => {
   const { items, totalPrice } = useCart()
+  const { mutateAsync, isPending } = useCheckout()
+  const navigate = useNavigate()
+
+  const handleCheckout = async () => {
+    const purchasedItems = items.map((item) => {
+      return { nftId: item.id, quantity: item.quantity }
+    })
+
+    const purchased = await mutateAsync(purchasedItems)
+    navigate({ to: `/purchases/${purchased.id}` })
+  }
 
   return (
     <div className="flex flex-col gap-3 mt-8">
@@ -342,7 +355,11 @@ const Checkout = () => {
                 </RadioGroup>
               </div>
             </div>
-            <Button className="bg-[#D28A4C] h-11.25 text-[#140D0A] font-bold text-[15px] leading-4 hover:bg-[#D28A4C] cursor-pointer">
+            <Button
+              onClick={handleCheckout}
+              disabled={isPending}
+              className="bg-[#D28A4C] h-11.25 text-[#140D0A] font-bold text-[15px] leading-4 hover:bg-[#D28A4C] cursor-pointer"
+            >
               Confirmar compra
             </Button>
           </div>

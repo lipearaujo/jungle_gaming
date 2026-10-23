@@ -1,13 +1,8 @@
 import ReactDOM from 'react-dom/client'
 import { RouterProvider, createRouter } from '@tanstack/react-router'
 import { routeTree } from './routeTree.gen'
-import {
-  useQuery,
-  useMutation,
-  useQueryClient,
-  QueryClient,
-  QueryClientProvider,
-} from '@tanstack/react-query'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { useCurrentUser } from './hooks/use-auth'
 
 const queryClient = new QueryClient()
 
@@ -15,6 +10,10 @@ const router = createRouter({
   routeTree,
   defaultPreload: 'intent',
   scrollRestoration: true,
+  context: {
+    queryClient,
+    auth: undefined as never,
+  },
 })
 
 declare module '@tanstack/react-router' {
@@ -33,11 +32,17 @@ if (import.meta.env.DEV) {
 
 const rootElement = document.getElementById('app')!
 
+function App() {
+  const auth = useCurrentUser()
+
+  return <RouterProvider router={router} context={{ auth, queryClient }} />
+}
+
 if (!rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement)
   root.render(
     <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
+      <App />
     </QueryClientProvider>,
   )
 }

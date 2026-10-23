@@ -10,8 +10,8 @@ export const fetchPurchased = async (
   return response.data.purchased
 }
 
-export const fetchUserPurchases = async () => {
-  const response = await api.get('/purchases')
+export const fetchUserPurchases = async (): Promise<Purchased[]> => {
+  const response = await api.get<{ purchases: Purchased[] }>('/purchases')
 
-  return response.data
+  return response.data.purchases
 }

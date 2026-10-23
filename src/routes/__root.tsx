@@ -1,12 +1,18 @@
-import { Outlet, createRootRoute } from '@tanstack/react-router'
-
+import { Outlet, createRootRouteWithContext } from '@tanstack/react-router'
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { TanStackDevtools } from '@tanstack/react-devtools'
 
 import '../styles.css'
 import CartProvider from '#/contexts/cart/cart-provider'
+import { useCurrentUser } from '#/hooks/use-auth'
+import { QueryClient } from '@tanstack/react-query'
 
-export const Route = createRootRoute({
+interface MyRouterContext {
+  queryClient: QueryClient
+  auth: ReturnType<typeof useCurrentUser>
+}
+
+export const Route = createRootRouteWithContext<MyRouterContext>()({
   component: RootComponent,
 })
 

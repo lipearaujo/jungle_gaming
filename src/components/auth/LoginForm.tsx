@@ -8,9 +8,18 @@ import { Eye, EyeOff } from 'lucide-react'
 import { useState } from 'react'
 import { Button } from '../ui/button'
 import { useLogin } from '#/hooks/use-auth'
+import { useNavigate } from '@tanstack/react-router'
 
-const LoginForm = () => {
+type Props = {
+  searchParams: {
+    returnTo: string
+    redirect: string
+  }
+}
+
+const LoginForm = ({ searchParams }: Props) => {
   const { data: authResponse, mutate, isPending, error } = useLogin()
+  const navigate = useNavigate()
 
   const [showPassword, setShowPassword] = useState<boolean>(false)
 
@@ -27,7 +36,11 @@ const LoginForm = () => {
   })
 
   const onSubmit = (data: z.infer<typeof loginSchema>) => {
-    mutate(data)
+    mutate(data, {
+      onSuccess: () => {
+        navigate({ to: searchParams.redirect })
+      },
+    })
   }
 
   return (
