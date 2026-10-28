@@ -5,7 +5,7 @@ function Table({ className, ...props }: React.ComponentProps<'table'>) {
   return (
     <div
       data-slot="table-container"
-      className="flex flex-1 self-start  overflow-x-auto"
+      className="flex flex-1 self-start overflow-x-auto"
     >
       <table
         data-slot="table"
@@ -50,7 +50,7 @@ function TableRow({ className, ...props }: React.ComponentProps<'tr'>) {
     <tr
       data-slot="table-row"
       className={cn(
-        'transition-colors  has-aria-expanded:bg-muted/50 data-[state=selected]:bg-muted',
+        'transition-colors has-aria-expanded:bg-muted/50 data-[state=selected]:bg-muted',
         className,
       )}
       {...props}
@@ -63,7 +63,7 @@ function TableHead({ className, ...props }: React.ComponentProps<'th'>) {
     <th
       data-slot="table-head"
       className={cn(
-        'text-left align-middle font-medium whitespace-nowrap text-foreground [&:has([role=checkbox])]:pr-0',
+        'text-left align-middle font-medium whitespace-nowrap text-foreground has-[[role=checkbox]]:pr-0',
         className,
       )}
       {...props}
@@ -76,7 +76,7 @@ function TableCell({ className, ...props }: React.ComponentProps<'td'>) {
     <td
       data-slot="table-cell"
       className={cn(
-        'align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0',
+        'align-middle whitespace-nowrap has-[[role=checkbox]]:pr-0',
         className,
       )}
       {...props}

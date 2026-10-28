@@ -41,16 +41,16 @@ const NFTGrid = ({
 }: Props) => {
   return (
     <div className="flex flex-col gap-8 w-full">
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center max-sm:mt-6 ">
         <NavigationMenu className="">
           <NavigationMenuList className="">
-            <NavigationMenuItem className="flex gap-5">
+            <NavigationMenuItem className="flex gap-2 sm:gap-5">
               <NavigationMenuLink
                 onClick={() => onSelectedView(NFTView.all)}
                 className={
                   selectedView === NFTView.all
-                    ? 'text-[#E89B55] p-0 text-[15px] font-medium leading-4 cursor-pointer border-b-2 border-b-[#E89B55]'
-                    : 'text-[#F5F1EB] p-0 text-[15px] font-medium leading-4 cursor-pointer'
+                    ? 'text-[#E89B55] p-0 text-sm sm:text-[15px] font-bold sm:font-medium leading-4 cursor-pointer border-b-2 border-b-[#E89B55]'
+                    : 'text-[#F5F1EB] p-0 text-sm sm:text-[15px] font-normal sm:font-medium leading-4 cursor-pointer'
                 }
               >
                 Todos os NFTs
@@ -59,8 +59,8 @@ const NFTGrid = ({
                 onClick={() => onSelectedView(NFTView.new)}
                 className={
                   selectedView === NFTView.new
-                    ? 'text-[#E89B55] p-0 text-[15px] font-medium leading-4 cursor-pointer border-b-2 border-b-[#E89B55]'
-                    : 'text-[#F5F1EB] p-0 text-[15px] font-medium leading-4 cursor-pointer'
+                    ? 'text-[#E89B55] p-0 text-sm sm:text-[15px] font-bold sm:font-medium leading-4 cursor-pointer border-b-2 border-b-[#E89B55]'
+                    : 'text-[#F5F1EB] p-0 text-sm sm:text-[15px] font-normal sm:font-medium leading-4 cursor-pointer'
                 }
               >
                 Novos lançamentos
@@ -69,8 +69,8 @@ const NFTGrid = ({
                 onClick={() => onSelectedView(NFTView.trending)}
                 className={
                   selectedView === NFTView.trending
-                    ? 'text-[#E89B55] p-0 text-[15px] font-medium leading-4 cursor-pointer border-b-2 border-b-[#E89B55]'
-                    : 'text-[#F5F1EB] p-0 text-[15px] font-medium leading-4 cursor-pointer'
+                    ? 'text-[#E89B55] p-0 text-sm sm:text-[15px] font-bold sm:font-medium leading-4 cursor-pointer border-b-2 border-b-[#E89B55]'
+                    : 'text-[#F5F1EB] p-0 text-sm sm:text-[15px] font-normal sm:font-medium leading-4 cursor-pointer'
                 }
               >
                 Em alta
@@ -79,7 +79,7 @@ const NFTGrid = ({
           </NavigationMenuList>
         </NavigationMenu>
 
-        <div className="flex items-center justify-center gap-1 w-75 h-4.5">
+        <div className="hidden sm:flex items-center justify-center gap-1 w-75 h-4.5">
           <p className="text-[15px] leading-none ">Ordenar por:</p>
           <Select items={items} defaultValue={'Listados recentemente'}>
             <SelectTrigger className="max-w-48 bg-transparent border-0">
@@ -98,14 +98,14 @@ const NFTGrid = ({
         </div>
       </div>
 
-      <div className="grid grid-cols-3 gap-18">
+      <div className="grid grid-cols-2 sm:grid-cols-3 sm:gap-18 gap-5">
         {nfts.map((nft) => (
           <NFTCard key={nft.id} nfts={nft} />
         ))}
       </div>
 
       {nfts.length > 0 ? (
-        <div className="flex gap-2 justify-end">
+        <div className="flex gap-2 justify-center sm:justify-end">
           <Button
             type="button"
             onClick={() => onPageChange(currentPage - 1)}

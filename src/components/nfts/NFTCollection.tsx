@@ -25,7 +25,7 @@ const NFTCollection = ({ nft }: Props) => {
   )
 
   return (
-    <div className="mt-24 flex flex-col gap-8">
+    <div className="hidden mt-24 sm:flex flex-col gap-8">
       <div className="flex flex-col gap-3">
         <p className="font-bold text-[#E89B55] text-[17px] leading-4">
           Mais desta coleção

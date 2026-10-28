@@ -5,10 +5,12 @@ import Sidebar from '../layout/Sidebar'
 import NFTGrid from '../nfts/NFTGrid'
 import { NFTView } from '#/types/nft-view'
 import { Network } from '#/types/nfts'
+import { useSearch } from '@tanstack/react-router'
 
 const Products = () => {
   const { data: categories } = useCategories()
   const { data: nfts } = useNfts()
+  const { search } = useSearch({ from: '/_app' })
 
   const [selectedCategory, setSelectedCategory] = useState<string | null>(
     'Arte digital',
@@ -29,7 +31,10 @@ const Products = () => {
     (nft) =>
       (nft.category === selectedCategory || selectedCategory === null) &&
       Number(nft.price) >= minPrice &&
-      Number(nft.price) <= maxPrice,
+      Number(nft.price) <= maxPrice &&
+      (search !== ''
+        ? nft.name.toLowerCase().includes(search.toLowerCase())
+        : true),
   )
 
   const filteredByView = filteredNfts?.filter((nft) => {
@@ -57,6 +62,7 @@ const Products = () => {
   )
 
   const paginatedNfts = sortedNfts.slice(startIndex, endIndex)
+
   const totalPages = Math.ceil(sortedNfts.length / pageSize)
 
   return (

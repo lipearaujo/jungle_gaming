@@ -7,21 +7,27 @@ const Hero = () => {
   const randomNft = nfts?.[Math.floor(Math.random() * (nfts.length ?? 0))]
 
   return (
-    <section className="mt-8 w-full h-112.5">
-      <div className="flex justify-between">
-        <div className="w-150 flex flex-col gap-3 px-8">
-          <p className="font-medium text-sm leading-4 text-[#F5F1EB]">
+    <section className="sm:mt-8 mt-4 sm:h-112.5 w-full h-47.5">
+      <div className="flex gap-4 p-2.5 items-center sm:justify-between sm:bg-linear-to-r rounded-4xl sm:from-[#140D0A] sm:to-[#140D0A] bg-linear-to-r from-[#D28A4C]/45 to-[#D28A4C]">
+        <div className="sm:w-150  flex flex-col sm:gap-3 gap-4 sm:px-8">
+          <p className="font-medium sm:text-sm text-[12px] leading-4 text-[#F5F1EB]">
             Bem-vindo à Kurio
           </p>
-          <h1 className="font-bold text-[43px] leading-17.5">
+          <h1 className="hidden sm:block font-bold sm:text-[43px] text-lg sm:leading-17.5 leading-7.25">
             SEJA DONO DO FUTURO DA ARTE DIGITAL
           </h1>
-          <p className="font-normal text-sm leading-6 text-[#CFB28C] w-137.5 text-start">
+          <h1 className="sm:hidden font-bold sm:text-[43px] text-lg sm:leading-17.5 leading-7.25">
+            SEJA DONO DA CULTURA DIGITAL
+          </h1>
+          <p className="hidden sm:block font-normal text-sm leading-6 text-[#CFB28C] w-137.5 text-start">
             Descubra NFTs selecionados de criadores emergentes e consagrados.
             Colecione arte digital rara, apoie artistas e tenha uma parte da
             cultura da internet.
           </p>
-          <Button className="w-35 h-10 rounded-md bg-[#D28A4C] font-bold text-[#140D0A] cursor-pointer">
+          <p className="sm:hidden  font-normal text-[12px] leading-6 text-[#CFB28C]  text-start">
+            Descubra NFTs selecionados de criadores do mundo todo.
+          </p>
+          <Button className="sm:w-35 sm:h-10 rounded-md sm:bg-[#D28A4C] font-bold sm:text-[#140D0A] sm:text-center text-[#E89B55] text-start cursor-pointer">
             EXPLORAR
           </Button>
 
@@ -32,13 +38,13 @@ const Hero = () => {
           </div>
         </div>
 
-        <div className="w-112.5 h-112.5 rounded-md">
+        <div className="sm:w-112.5 sm:h-112.5 w-full h-full rounded-md">
           <img
             src={randomNft?.imageUrl}
             alt={randomNft?.name}
             width={450}
             height={450}
-            className="rounded-2xl"
+            className="rounded-2xl w-full h-auto"
           />
         </div>
       </div>

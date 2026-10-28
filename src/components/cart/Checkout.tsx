@@ -1,6 +1,6 @@
 import useCart from '#/hooks/use-cart'
 import { useCheckout } from '#/hooks/use-checkout'
-import { useNavigate } from '@tanstack/react-router'
+import { useNavigate, useRouter } from '@tanstack/react-router'
 import { Button } from '../ui/button'
 import { Input } from '../ui/input'
 import { Label } from '../ui/label'
@@ -14,6 +14,8 @@ import {
   SelectValue,
 } from '../ui/select'
 import { Textarea } from '../ui/textarea'
+import { ChevronLeft, EllipsisVertical } from 'lucide-react'
+import { Card, CardContent } from '../ui/card'
 
 const selectInputItems = [
   { label: 'Selecione uma rede', value: null },
@@ -36,13 +38,37 @@ const Checkout = () => {
     navigate({ to: `/purchases/${purchased.id}` })
   }
 
+  const router = useRouter()
+
+  const handleGoBack = () => {
+    if (router.history.canGoBack()) {
+      router.history.back()
+    } else {
+      router.navigate({ to: '/', search: { search: '' } })
+    }
+  }
+
   return (
-    <div className="flex flex-col gap-3 mt-8">
-      <p className="text-[15px] text-[#F5F1EB] leading-4 font-bold">
+    <div className="flex flex-col gap-3 sm:mt-8">
+      <p className="hidden sm:block text-[15px] text-[#F5F1EB] leading-4 font-bold">
         Início / Mercado / Carrinho
       </p>
 
-      <div className="mt-8 flex gap-8">
+      <div className="sm:hidden flex items-center">
+        <Button
+          onClick={handleGoBack}
+          size="icon-lg"
+          variant="default"
+          className="w-8.75 h-8.75 rounded-full bg-[#3F2319] p-0 m-0"
+        >
+          <ChevronLeft color="#B39463" size={20} />
+        </Button>
+        <p className="text-xl text-[#F5F1EB] leading-4 font-bold mx-auto">
+          Pagamento com carteira
+        </p>
+      </div>
+
+      <div className="hidden sm:flex mt-8 gap-8">
         <div className="flex flex-col gap-3">
           <p className="text-[17px] text-[#F5F1EB] leading-4 font-bold">
             Perfil do colecionador
@@ -198,11 +224,11 @@ const Checkout = () => {
           </div>
 
           <div className="mt-3">
-            <Textarea className="w-87.5 border border-[#3F2319] bg-transparent outline-none" />
+            <Textarea className="w-87.5 h-38 border border-[#3F2319] bg-transparent outline-none" />
           </div>
         </div>
 
-        <div className="w-101.25 flex flex-col gap-3">
+        <div className="flex flex-col gap-3 w-101.25">
           <p className="text-[17px] text-[#F5F1EB] leading-4 font-bold">
             Seus NFTs
           </p>
@@ -363,6 +389,147 @@ const Checkout = () => {
               Confirmar compra
             </Button>
           </div>
+        </div>
+      </div>
+
+      <div className="sm:hidden flex flex-col justify-between min-h-dvh mt-4">
+        <div className="flex flex-col gap-4">
+          <div className="flex justify-between">
+            <p className="text-base text-[#F5F1EB] leading-4 font-bold">
+              Carteira conectada
+            </p>
+            <p className="text-sm text-[#E89B55] leading-4 font-bold">
+              Trocar carteira
+            </p>
+          </div>
+
+          <div className="flex flex-col gap-5">
+            <Card className="bg-[#241612]">
+              <CardContent className="flex items-center gap-3">
+                <div className="flex gap-5 items-center justify-center  ">
+                  <RadioGroup className=" w-fit">
+                    <RadioGroupItem
+                      value="wallet"
+                      id="r1"
+                      className="border-2 border-[#D28A4C]"
+                    />
+                  </RadioGroup>
+
+                  <div className="flex flex-col gap-1 w-50.25 ">
+                    <p className="text-base font-bold leading-4 text-[#F5F1EB]">
+                      Reserva
+                    </p>
+                    <p className="text-sm font-normal leading-5.5 text-[#CFB28C]">
+                      nova.kurio.eth
+                    </p>
+                    <p className="text-sm font-normal leading-5.5 text-[#CFB28C]">
+                      Rede Polygon
+                    </p>
+                  </div>
+                </div>
+
+                <Button className="grow justify-end bg-transparent p-0">
+                  <EllipsisVertical color="#CFB28C" className="size-5" />
+                </Button>
+              </CardContent>
+            </Card>
+            <Card className="bg-[#241612]">
+              <CardContent className="flex items-center gap-3">
+                <div className="flex gap-5 items-center justify-center  ">
+                  <RadioGroup className=" w-fit">
+                    <RadioGroupItem
+                      value="wallet"
+                      id="r1"
+                      className="border-2 border-[#D28A4C]"
+                    />
+                  </RadioGroup>
+
+                  <div className="flex flex-col gap-1 w-50.25 ">
+                    <p className="text-base font-bold leading-4 text-[#F5F1EB]">
+                      Principal
+                    </p>
+                    <p className="text-sm font-normal leading-5.5 text-[#CFB28C]">
+                      0xA91F…E82C
+                    </p>
+                    <p className="text-sm font-normal leading-5.5 text-[#CFB28C]">
+                      Rede principal Ethereum
+                    </p>
+                  </div>
+                </div>
+
+                <Button className="grow justify-end bg-transparent p-0">
+                  <EllipsisVertical color="#CFB28C" className="size-5" />
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="flex justify-between">
+            <p className="text-base text-[#F5F1EB] leading-4 font-bold">
+              Carteira e rede
+            </p>
+          </div>
+
+          <div className="flex flex-col gap-5">
+            <Card className="bg-[#241612]">
+              <CardContent className="flex justify-between items-center gap-3">
+                <div className="flex items-center gap-3 w-full">
+                  <div className="text-[#E89B55] w-10 h-10 rounded-full bg-[#2F1D15] border border-[#3F2319] flex items-center justify-center">
+                    W
+                  </div>
+
+                  <p className="text-base font-bold leading-4 text-[#F5F1EB]">
+                    Principal
+                  </p>
+                </div>
+
+                <RadioGroup className="w-fit">
+                  <RadioGroupItem
+                    value="wallet"
+                    id="r1"
+                    className="border-2 border-[#D28A4C]"
+                  />
+                </RadioGroup>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-[#241612]">
+              <CardContent className="flex justify-between items-center gap-3">
+                <div className="flex items-center gap-3 w-full">
+                  <div className="text-[#E89B55] w-10 h-10 rounded-full bg-[#2F1D15] border border-[#3F2319] flex items-center justify-center">
+                    W
+                  </div>
+
+                  <p className="text-base font-bold leading-4 text-[#F5F1EB]">
+                    Principal
+                  </p>
+                </div>
+
+                <RadioGroup className="w-fit">
+                  <RadioGroupItem
+                    value="wallet"
+                    id="r1"
+                    className="border-2 border-[#D28A4C]"
+                  />
+                </RadioGroup>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="flex justify-end">
+            <div className="flex gap-4">
+              <p className="text-bsae font-bold leading-4">Total:</p>
+              <p className="text-[#E89B55] text-lg font-bold leading-4">
+                {totalPrice}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-auto">
+          <Button className="bg-[#D28A4C] text-[#140D0A] leading-4 font-bold text-base w-full h-15 rounded-full ">
+            Confirmar compra
+          </Button>
         </div>
       </div>
     </div>

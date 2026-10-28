@@ -25,7 +25,7 @@ const NFTTabs = ({ nft }: Props) => {
   const [buttonValue, setButtonValue] = useState<ButtonValues>('details')
 
   return (
-    <div className="mt-24 flex flex-col gap-2">
+    <div className="hidden sm:flex flex-col gap-2 mt-24">
       <div className="flex items-center gap-8">
         {buttonOptions.map((button) => (
           <div key={button.btnValue}>

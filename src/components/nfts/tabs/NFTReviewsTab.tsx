@@ -1,9 +1,5 @@
-import React from 'react'
-
-type Props = {}
-
-const NFTReviewsTab = (props: Props) => {
-  return <div>NFTReviewsTab</div>
+const NFTReviewsTab = () => {
+  return <div>Reviews</div>
 }
 
 export default NFTReviewsTab

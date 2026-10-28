@@ -16,10 +16,10 @@ const networkSymbols: Record<Network, string> = {
 
 const NFTCard = ({ nfts }: Props) => {
   return (
-    <Link to="/nft/$nftId" params={{ nftId: nfts.id }}>
+    <Link to="/nft/$nftId" search={{ search: '' }} params={{ nftId: nfts.id }}>
       <Card className="w-full bg-transparent p-0">
         <CardContent className="flex flex-col gap-3 p-0">
-          <div className="w-full h-75 bg-[#241612] flex items-center justify-center">
+          <div className="w-full sm:h-75 h-50 bg-[#241612] flex items-center justify-center">
             <img
               src={nfts.imageUrl}
               alt={nfts.name}

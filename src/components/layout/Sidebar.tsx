@@ -32,7 +32,7 @@ const Sidebar = ({
   const networkValues = Object.values(Network)
 
   return (
-    <aside className="flex flex-col w-77.5">
+    <aside className="hidden sm:flex flex-col w-77.5">
       <div className="flex flex-col w-full gap-5">
         <div className="flex flex-col gap-5 bg-[#241612] p-6">
           <div>

@@ -1,6 +1,14 @@
 import { Card, CardContent } from '@/components/ui/card'
 import { useNfts } from '#/hooks/use-nfts'
 import { MoveRight } from 'lucide-react'
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  type CarouselApi,
+} from '../ui/carousel'
+import { useState } from 'react'
+import { Button } from '../ui/button'
 
 const cards = [
   {
@@ -28,24 +36,26 @@ const cards = [
 
 const Blog = () => {
   const { data: nfts } = useNfts()
+  const [carouselApi, setCarouselApi] = useState<CarouselApi>()
+  const [selectedIndex, setSelectedIndex] = useState(0)
 
   const randomNfts = [...(nfts ?? [])]
     .sort(() => Math.random() - 0.5)
     .slice(0, 4)
 
   return (
-    <div className="flex flex-col gap-10 mt-24">
+    <div className="flex flex-col gap-10 mt-8 sm:mt-24">
       <div className="flex flex-col justify-center items-center gap-3">
         <h2 className="font-bold text-[28px] text-[#F5F1EB]">
           Diário da Cunhagem
         </h2>
-        <p className="text-sm text-[#CFB28C]">
+        <p className="text-sm text-[#CFB28C] text-center">
           Histórias, guias e insights para colecionadores sobre o universo da
           propriedade digital.
         </p>
       </div>
 
-      <div className="grid grid-cols-4">
+      <div className="hidden sm:grid grid-cols-4">
         {cards?.map((card, index) => (
           <Card
             key={card.title}
@@ -76,6 +86,57 @@ const Blog = () => {
               </div>
             </CardContent>
           </Card>
+        ))}
+      </div>
+
+      <Carousel setApi={setCarouselApi} className="sm:hidden">
+        <CarouselContent className="mx-auto">
+          {cards?.map((card, index) => (
+            <CarouselItem key={card.title} className="basis-5/5 pl-9">
+              <Card
+                key={card.title}
+                className="w-67 p-0 rounded-t-xl rounded-b-none bg-[#241612]"
+              >
+                <CardContent className="p-0 flex flex-col gap-2">
+                  <div className="w-full h-48.75">
+                    <img
+                      src={randomNfts[index]?.imageUrl}
+                      alt={randomNfts[index]?.name}
+                      className="w-full h-full object-cover "
+                    />
+                  </div>
+
+                  <div className="flex flex-col gap-2 py-3 px-4">
+                    <p className="text-[#CFB28C] text-[12px] font-medium leading-4">
+                      {card.date}
+                    </p>
+                    <h3 className="text-[#F5F1EB] text-base font-bold leading-none">
+                      {card.title}
+                    </h3>
+                    <p className="text-[#CFB28C] text-[12px] font-medium leading-4">
+                      {card.description}
+                    </p>
+                    <span className="cursor-pointer text-[#E89B55] text-[12px] font-bold leading-3.5 flex items-center gap-1">
+                      Ler mais <MoveRight size={12} />
+                    </span>
+                  </div>
+                </CardContent>
+              </Card>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+      </Carousel>
+
+      <div className="sm:hidden flex gap-2 items-center justify-center">
+        {carouselApi?.scrollSnapList().map((_, index) => (
+          <Button
+            key={index}
+            onClick={() => {
+              carouselApi.scrollTo(index)
+              setSelectedIndex(carouselApi.selectedScrollSnap())
+            }}
+            className={`hover:bg-[#D28A4C] border border-[#D28A4C] p-0 w-3 h-3 rounded-full cursor-pointer ${selectedIndex === index ? 'bg-[#D28A4C]' : 'bg-transparent '}`}
+          ></Button>
         ))}
       </div>
     </div>

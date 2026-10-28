@@ -9,9 +9,7 @@ import { Button } from '../ui/button'
 import { useState } from 'react'
 import { useNfts } from '#/hooks/use-nfts'
 
-type Props = {}
-
-const CartCollection = (props: Props) => {
+const CartCollection = () => {
   const { data } = useNfts()
   const [carouselApi, setCarouselApi] = useState<CarouselApi>()
   const [selectedIndex, setSelectedIndex] = useState(0)
@@ -21,7 +19,7 @@ const CartCollection = (props: Props) => {
     .slice(0, 8)
 
   return (
-    <div className="mt-24 flex flex-col gap-8">
+    <div className="hidden mt-24 sm:flex flex-col gap-8">
       <div className="flex flex-col gap-3">
         <p className="font-bold text-[#E89B55] text-[17px] leading-4">
           Colecionadores também viram
