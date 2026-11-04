@@ -16,7 +16,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { ChevronLeft, ChevronRight, SlidersHorizontal } from 'lucide-react'
+import useMobileFilter from '#/hooks/use-mobileFilter'
 
 const items = [
   { label: 'Listados recentemente', value: 'Listados recentemente' },
@@ -39,6 +40,8 @@ const NFTGrid = ({
   totalPages,
   onPageChange,
 }: Props) => {
+  const { setIsFilterOpen } = useMobileFilter()
+
   return (
     <div className="flex flex-col gap-8 w-full">
       <div className="flex justify-between items-center max-sm:mt-6 ">
@@ -79,7 +82,7 @@ const NFTGrid = ({
           </NavigationMenuList>
         </NavigationMenu>
 
-        <div className="hidden sm:flex items-center justify-center gap-1 w-75 h-4.5">
+        <div className="hidden xl:flex items-center justify-center gap-1 w-75 h-4.5">
           <p className="text-[15px] leading-none ">Ordenar por:</p>
           <Select items={items} defaultValue={'Listados recentemente'}>
             <SelectTrigger className="max-w-48 bg-transparent border-0">
@@ -95,6 +98,16 @@ const NFTGrid = ({
               </SelectGroup>
             </SelectContent>
           </Select>
+        </div>
+
+        <div className="max-sm:hidden xl:hidden flex items-center justify-center gap-3">
+          <p className="font-bold text-sm">Filtros</p>
+          <Button
+            className="flex items-center justify-center w-11.25 h-11.25 bg-linear-to-r from-[#D28A4C]/45 to-[#D28A4C] rounded-2xl"
+            onClick={() => setIsFilterOpen(true)}
+          >
+            <SlidersHorizontal color="black" size={22} />
+          </Button>
         </div>
       </div>
 

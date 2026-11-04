@@ -45,8 +45,13 @@ const RegisterForm = ({ searchParams }: Props) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3">
-      <p className="text-[13px] leading-4 text-[#F5F1EB] text-center py-6">
-        Crie seu perfil de colecionador e conecte uma carteira quando quiser.
+      <p className="text-[13px] leading-4 text-[#F5F1EB] text-center py-3 sm:py-6">
+        <span className="hidden sm:block">
+          Crie seu perfil de colecionador e conecte uma carteira quando quiser.
+        </span>
+        <span className="text-lg font-bold leading-4 sm:hidden">
+          Criar perfil de colecionador
+        </span>
       </p>
       <FieldGroup>
         <Controller

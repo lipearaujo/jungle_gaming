@@ -7,7 +7,7 @@ const inputSearchSchema = z.object({
   search: z.string().default(''),
 })
 
-type InputSearchSchema = z.infer<typeof inputSearchSchema>
+//type InputSearchSchema = z.infer<typeof inputSearchSchema>
 
 export const Route = createFileRoute('/_app')({
   validateSearch: (search) => inputSearchSchema.parse(search),
@@ -22,8 +22,8 @@ function Home() {
   })
 
   return (
-    <div className="sm:p-8 p-4 font-mono">
-      <div className="sm:w-300 w-full mx-auto text-[#F5F1EB]">
+    <div className="p-4 sm:p-6 lg:p-8 font-mono">
+      <div className="w-full max-w-300 min-w-0 mx-auto text-[#F5F1EB]">
         <div className={pathname === '/' ? '' : 'hidden sm:block'}>
           <Header />
         </div>

@@ -45,8 +45,11 @@ const LoginForm = ({ searchParams }: Props) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3">
-      <p className="text-[13px] leading-4 text-[#F5F1EB] text-center py-6">
-        Entre para gerenciar sua carteira, coleção e perfil de criador.
+      <p className="text-[13px] leading-4 text-[#F5F1EB] text-center py-3 sm:py-6">
+        <span className="hidden sm:block">
+          Entre para gerenciar sua carteira, coleção e perfil de criador.
+        </span>
+        <span className="text-xl font-bold sm:hidden">Entrar</span>
       </p>
       <FieldGroup>
         <Controller

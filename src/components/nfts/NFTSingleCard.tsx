@@ -56,7 +56,7 @@ const NFTSingleCard = ({ nft }: Props) => {
         </div>
       </div>
 
-      <div className="flex max-sm:flex-col items-center justify-between gap-7">
+      <div className="flex max-xl:flex-col items-center justify-between gap-7">
         <div className="sm:w-143.25 sm:h-112 flex gap-7">
           <div className="hidden sm:block sm:w-25">
             <div className="grid grid-rows-4 gap-4">

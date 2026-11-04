@@ -31,7 +31,10 @@ const CartCollection = () => {
       <Carousel setApi={setCarouselApi} className="">
         <CarouselContent className="-ml-9">
           {filterByTrending?.map((nftsByCollection) => (
-            <CarouselItem key={nftsByCollection.id} className="basis-1/5 pl-9">
+            <CarouselItem
+              key={nftsByCollection.id}
+              className="lg:basis-1/5 basis-2/5 pl-9"
+            >
               <NFTCard nfts={nftsByCollection} />
             </CarouselItem>
           ))}

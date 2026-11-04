@@ -13,6 +13,13 @@ import { Link, useRouter } from '@tanstack/react-router'
 import CartCollection from './CartCollection'
 import useCart from '#/hooks/use-cart'
 import { useCurrentUser } from '#/hooks/use-auth'
+import { Network } from '#/types/nfts'
+
+const networkSymbols: Record<Network, string> = {
+  [Network.ethereum]: 'ETH',
+  [Network.polygon]: 'POL',
+  [Network.solana]: 'SOL',
+}
 
 const Cart = () => {
   const { data: user } = useCurrentUser()
@@ -21,11 +28,7 @@ const Cart = () => {
   const router = useRouter()
 
   const handleGoBack = () => {
-    if (router.history.canGoBack()) {
-      router.history.back()
-    } else {
-      router.navigate({ to: '/', search: { search: '' } })
-    }
+    router.navigate({ to: '/', search: { search: '' } })
   }
 
   return (
@@ -48,8 +51,8 @@ const Cart = () => {
         </p>
       </div>
 
-      <div className="flex max-sm:flex-col justify-between sm:gap-8">
-        <Table className="w-full table-fixed sm:grow sm:w-auto min-w-0 sm:-mt-3 border-separate border-spacing-y-3">
+      <div className="flex max-lg:flex-col justify-between sm:gap-8 max-sm:pb-50">
+        <Table className="w-full table-fixed sm:grow lg:w-auto min-w-0 sm:-mt-3 border-separate border-spacing-y-3 max-sm:pb-24">
           <TableHeader className="hidden sm:table-header-group">
             <TableRow>
               <TableHead className="text-[#F5F1EB] w-62.5 font-bold text-base leading-4 border-b border-b-[#D28A4C]/30 pb-3">
@@ -88,13 +91,13 @@ const Cart = () => {
                         {item.id.slice(item.id.length - 3, item.id.length)}
                       </p>
                       <p className="sm:hidden font-bold text-sm text-[#E89B55] justify-end leading-4">
-                        {item.price}
+                        {item.price} {item.network}
                       </p>
                     </div>
                   </div>
                 </TableCell>
                 <TableCell className="hidden sm:table-cell text-center text-[#CFB28C] font-bold text-base leading-4">
-                  {item.price}
+                  {item.price} {networkSymbols[item.network]}
                 </TableCell>
                 <TableCell className="text-center rounded-r-xl sm:rounded-none pl-20 sm:pl-0">
                   <div className="flex justify-center items-center gap-3 ">
@@ -120,7 +123,8 @@ const Cart = () => {
                   </div>
                 </TableCell>
                 <TableCell className="hidden sm:table-cell text-center text-[#E89B55] font-bold text-base leading-4">
-                  {(Number(item.price) * item.quantity).toFixed(2)}
+                  {(Number(item.price) * item.quantity).toFixed(2)}{' '}
+                  {networkSymbols[item.network]}
                 </TableCell>
                 <TableCell className="hidden sm:table-cell">
                   <Button
@@ -135,7 +139,7 @@ const Cart = () => {
           </TableBody>
         </Table>
 
-        <div className="max-sm:-mb-4 max-sm:-mx-4 max-sm:p-4 sm:w-83 flex flex-col gap-6 max-sm:bg-[#241612] rounded-t-[40px]">
+        <div className="max-sm:fixed max-sm:inset-x-0 max-sm:bottom-0 max-sm:z-40 max-sm:mx-0 max-sm:mb-0 max-sm:p-4 p-4 sm:p-0 lg:w-83 flex flex-col gap-6 max-sm:bg-[#241612] rounded-t-[40px]">
           <div className="hidden sm:flex flex-col gap-3">
             <p className="text-[#F5F1EB] font-bold text-lg leading-4">
               Resumo da carteira
@@ -162,20 +166,20 @@ const Cart = () => {
                 Subtotal
               </p>
               <p className="text-[#F5F1EB] leading-4 text-lg">
-                {totalPrice.toFixed(2)} ETH
+                {totalPrice.toFixed(2)}
               </p>
             </div>
             <div className="flex justify-between w-full">
               <p className="text-[#F5F1EB] leading-none text-[15px]">
                 Desconto do lançamento
               </p>
-              <p className="text-[#F5F1EB] leading-4 text-lg">(-) 00.00</p>
+              <p className="text-[#F5F1EB] leading-4 text-[15px]">(-) 00.00</p>
             </div>
             <div className="flex justify-between">
               <p className="text-[#F5F1EB] leading-none text-[15px]">
                 Taxa de rede
               </p>
-              <p className="text-[#F5F1EB] leading-4 text-lg">0.016 ETH</p>
+              <p className="text-[#F5F1EB] leading-4 text-lg">0.000</p>
             </div>
           </div>
           <div className="flex justify-between">
@@ -183,7 +187,7 @@ const Cart = () => {
               Total
             </p>
             <p className="font-bold text-lg leading-4 text-[#E89B55]">
-              {(totalPrice + 0.016).toFixed(3)} ETH
+              {totalPrice.toFixed(3)}
             </p>
           </div>
           <div className="flex flex-col gap-3 w-full">

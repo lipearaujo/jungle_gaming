@@ -1,4 +1,11 @@
-import { LogIn, Search, ShoppingCart, SlidersHorizontal, X } from 'lucide-react'
+import {
+  LogIn,
+  Search,
+  ShoppingCart,
+  SlidersHorizontal,
+  X,
+  User,
+} from 'lucide-react'
 import { Link, useNavigate, useRouterState } from '@tanstack/react-router'
 import { Dialog, DialogContent } from '@/components/ui/dialog'
 import { useCurrentUser, useLogout } from '#/hooks/use-auth'
@@ -8,6 +15,16 @@ import Form from '../auth/Form'
 import { useState } from 'react'
 import { Input } from '../ui/input'
 import { Button } from '../ui/button'
+import useMobileFilter from '#/hooks/use-mobileFilter'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
 
 const linkOptions = [
   {
@@ -20,6 +37,7 @@ const Header = () => {
   const { mutate, isPending: isLogoutPending } = useLogout()
   const { data } = useCurrentUser()
   const { totalItems } = useCart()
+  const { setIsFilterOpen } = useMobileFilter()
   const hasToken = !!getToken()
   const navigate = useNavigate()
   const [isShowSearch, setIsShowSearch] = useState<boolean>(false)
@@ -39,6 +57,7 @@ const Header = () => {
   const onSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault()
     navigate({ to: '/', search: (prev) => ({ ...prev, search: inputText }) })
+    setInputText('')
   }
 
   const isMarketActive = pathname.startsWith('/nft/')
@@ -59,7 +78,7 @@ const Header = () => {
         KURIO
       </Link>
 
-      <nav className="hidden md:flex items-center justify-center gap-10 w-100.25 h-full">
+      <nav className="hidden md:text-sm lg:text-base md:flex items-center justify-center gap-10 w-100.25 h-full">
         {linkOptions.map((link) => (
           <Link
             key={link.name}
@@ -67,7 +86,7 @@ const Header = () => {
             search={{
               search: '',
             }}
-            className={`text-base leading-none ${pathname === link.route ? 'text-[#E89B55] font-bold' : 'text-[#F5F1EB] font-normal'}`}
+            className={`md:text-sm lg:text-base leading-none ${pathname === link.route ? 'text-[#E89B55] font-bold' : 'text-[#F5F1EB] font-normal'}`}
           >
             {link.name}
             {pathname === link.route || isIndexActive ? (
@@ -79,7 +98,7 @@ const Header = () => {
         ))}
 
         <span
-          className={`text-base leading-none ${isMarketActive ? 'text-[#E89B55]' : 'text-[#F5F1EB]'}`}
+          className={`leading-none ${isMarketActive ? 'text-[#E89B55]' : 'text-[#F5F1EB]'}`}
         >
           Mercado
           {isMarketActive ? (
@@ -94,39 +113,36 @@ const Header = () => {
         <span className="text-[#F5F1EB]">Aprenda</span>
       </nav>
 
-      <div className="md:relative  h-full flex justify-between md:gap-6 gap-2 items-center">
+      <div className="xl:relative h-full flex justify-between md:gap-6 gap-2 items-center">
         <form
           action=""
           onSubmit={onSubmit}
-          className={`max-sm:w-full h-8.75 md:absolute right-40 flex items-center gap-3 rounded-lg md:${isShowSearch ? 'border border-[#D28A4C]' : ''}`}
+          className={`hidden max-sm:flex max-sm:w-full h-8.75 xl:absolute ${hasToken && data ? 'right-25' : 'right-40'} xl:flex items-center gap-3 rounded-lg ${isShowSearch ? 'xl:border xl:border-[#D28A4C]' : ''}`}
         >
           <Input
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
             onBlur={() => setIsShowSearch(false)}
-            className={`w-full h-full pl-9 md:pl-3 md:h-full md:placeholder-transparent md:w-0 border-none bg-[#241612] md:bg-transparent md:${isShowSearch ? 'w-54 border border-[#D28A4C] transition-all duration-300 ease-in-out' : 'w-0 transition-all duration-300 ease-in-out '}`}
+            className={`max-sm:w-full max-sm:h-full pl-9 xl:pl-3 xl:h-full xl:placeholder-transparent xl:w-0 border-none bg-[#241612] xl:bg-transparent ${isShowSearch ? 'xl:w-54 transition-all duration-300 ease-in-out' : 'w-0 transition-all duration-300 ease-in-out '}`}
             placeholder="Explorar coleções"
           />
-          {isShowSearch ? (
-            <Button type="button" onClick={handleShowSearch}>
-              <X
-                color="white"
-                size={20}
-                className="cursor-pointer bg-transparent hidden md:block"
-              />
-            </Button>
-          ) : (
-            <Button
-              type="button"
-              onClick={handleShowSearch}
-              className="cursor-pointer bg-transparent absolute right-80 md:right-0"
-            >
-              <Search size={20} className="text-[#B39463] md:text-[#F5F1EB]" />
-            </Button>
-          )}
+          <Button
+            type="button"
+            className="cursor-pointer hover:bg-transparent bg-transparent hidden xl:block"
+            onClick={handleShowSearch}
+          >
+            {isShowSearch ? (
+              <X color="white" size={20} />
+            ) : (
+              <Search size={20} className="text-[#B39463] xl:text-[#F5F1EB]" />
+            )}
+          </Button>
         </form>
 
-        <Button className="md:hidden w-11.25 h-11.25 bg-linear-to-r from-[#D28A4C]/45 to-[#D28A4C] rounded-2xl">
+        <Button
+          className="md:hidden w-11.25 h-11.25 bg-linear-to-r from-[#D28A4C]/45 to-[#D28A4C] rounded-2xl"
+          onClick={() => setIsFilterOpen(true)}
+        >
           <SlidersHorizontal color="black" size={22} />
         </Button>
 
@@ -137,26 +153,54 @@ const Header = () => {
           }}
         >
           <ShoppingCart size={20} className="hidden sm:block cursor-pointer" />
-          <div className="hidden w-4 h-4 rounded-full bg-[#D28A4C] text-[10px] text-[#140D0A] md:flex items-center justify-center font-medium -mt-3.75 relative -top-2.5 -right-2.5">
+          <div className="hidden w-4 h-4 rounded-full bg-[#D28A4C] text-[10px] text-[#140D0A] sm:flex items-center justify-center font-medium -mt-3.75 relative -top-2.5 -right-2.5">
             {totalItems}
           </div>
         </Link>
 
         {hasToken && data ? (
-          <Button
-            className="hidden md:block cursor-pointer w-25 text-black bg-[#D28A4C]"
-            variant="header"
-            onClick={() =>
-              mutate(undefined, {
-                onSuccess: () => {
-                  navigate({ to: '/', search: { search: '' } })
-                },
-              })
-            }
-            disabled={isLogoutPending}
-          >
-            {isLogoutPending ? 'Saindo...' : 'Sair'}
-          </Button>
+          <DropdownMenu>
+            <DropdownMenuTrigger
+              render={
+                <Button
+                  variant="outline"
+                  className="border-0 bg-transparent hover:bg-[#140d0a] hover:text-white cursor-pointer max-sm:hidden"
+                >
+                  <User className="size-6" />
+                </Button>
+              }
+            />
+            <DropdownMenuContent className="w-40" align="start">
+              <DropdownMenuGroup>
+                <DropdownMenuLabel>Meu Perfil</DropdownMenuLabel>
+                <DropdownMenuItem>
+                  <Link to="/account/profile">Dados do Perfil</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link to="/account/wallets">Carteiras</Link>
+                </DropdownMenuItem>
+              </DropdownMenuGroup>
+              <DropdownMenuSeparator />
+              <DropdownMenuGroup>
+                <DropdownMenuItem>
+                  <Button
+                    className="hidden md:block cursor-pointer text-black bg-transparent"
+                    variant="header"
+                    onClick={() =>
+                      mutate(undefined, {
+                        onSuccess: () => {
+                          navigate({ to: '/', search: { search: '' } })
+                        },
+                      })
+                    }
+                    disabled={isLogoutPending}
+                  >
+                    {isLogoutPending ? 'Saindo...' : 'Sair'}
+                  </Button>
+                </DropdownMenuItem>
+              </DropdownMenuGroup>
+            </DropdownMenuContent>
+          </DropdownMenu>
         ) : (
           <div className="hidden md:block">
             <Link
@@ -180,7 +224,7 @@ const Header = () => {
                 }
               }}
             >
-              <DialogContent className="bg-[#241612] w-125 h-150 rounded-xl p-0">
+              <DialogContent className="bg-[#140D0A] sm:bg-[#241612] w-125 h-150 rounded-xl p-0 max-sm:fixed max-sm:inset-0 max-sm:left-0 max-sm:top-0 max-sm:translate-x-0 max-sm:translate-y-0 max-sm:w-screen max-sm:h-dvh max-sm:max-w-none max-sm:rounded-none max-sm:border-0 max-sm:p-4">
                 <Form
                   pathname={pathname}
                   searchParams={{

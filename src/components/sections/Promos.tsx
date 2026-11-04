@@ -9,7 +9,7 @@ const Promos = () => {
   const randomNft2 = nfts?.[Math.floor(Math.random() * (nfts.length ?? 0))]
 
   return (
-    <div className="flex max-sm:flex-col gap-5 justify-between mt-8 sm:mt-24">
+    <div className="flex max-lg:flex-col items-center gap-5 justify-between mt-8 sm:mt-24">
       <Card className="w-full sm:w-146.5 h-full sm:h-62.5 bg-[#241612] p-0">
         <CardContent className="w-full h-full p-0 flex justify-between gap-2">
           <div className="w-full h-full">

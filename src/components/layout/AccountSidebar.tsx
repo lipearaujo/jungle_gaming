@@ -47,7 +47,7 @@ const AccountSidebar = () => {
             onClick={() =>
               mutate(undefined, {
                 onSuccess: () => {
-                  navigate({ to: '/' })
+                  navigate({ to: '/', search: { search: '' } })
                 },
               })
             }

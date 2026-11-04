@@ -3,6 +3,9 @@ import { Slider } from '@/components/ui/slider'
 import type INfts from '#/types/nfts'
 import type ICategory from '#/types/category'
 import { Network } from '#/types/nfts'
+import { Input } from '../ui/input'
+import { useState } from 'react'
+import { useNavigate } from '@tanstack/react-router'
 
 type Props = {
   nfts: INfts[]
@@ -30,16 +33,39 @@ const Sidebar = ({
 }: Props) => {
   const randomNft = nfts?.[Math.floor(Math.random() * (nfts.length ?? 0))]
   const networkValues = Object.values(Network)
+  const [inputText, setInputText] = useState<string>('')
+  const navigate = useNavigate()
+
+  const onSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    navigate({ to: '/', search: (prev) => ({ ...prev, search: inputText }) })
+    setInputText('')
+  }
 
   return (
-    <aside className="hidden sm:flex flex-col w-77.5">
+    <aside className="flex flex-col w-full h-full sm:w-77.5">
       <div className="flex flex-col w-full gap-5">
-        <div className="flex flex-col gap-5 bg-[#241612] p-6">
+        <div className="flex flex-col gap-5 bg-[#241612] p-4 sm:p-6">
+          <div className="max-sm:hidden xl:hidden flex items-center justify-center">
+            <form
+              action=""
+              onSubmit={onSubmit}
+              className={`w-full h-8.75  flex items-center gap-3 rounded-lg border xl:border-[#D28A4C]`}
+            >
+              <Input
+                value={inputText}
+                onChange={(e) => setInputText(e.target.value)}
+
+                className={`w-full h-full pl-3 placeholder-transparent text-white  border-none bg-[#241612]`}
+                placeholder="Pesquisar NFT"
+              />
+            </form>
+          </div>
           <div>
             <h3 className="font-bold text-lg text-[#F5F1EB] leading-4">
               Coleções
             </h3>
-            <ul className="p-5 flex flex-col gap-5">
+            <ul className="p-5 flex flex-col gap-3 sm:gap-5">
               {categories?.map((category) => (
                 <li
                   onClick={() => onCategoryChange(category.name)}
@@ -88,7 +114,7 @@ const Sidebar = ({
             </div>
           </div>
 
-          <div className="flex flex-col">
+          <div className="flex flex-col max-sm:min-h-dvh">
             <h3 className="font-bold text-lg text-[#F5F1EB] leading-4">Rede</h3>
             <div className="p-5 flex flex-col gap-4">
               <ul className="flex flex-col gap-5">
@@ -116,7 +142,7 @@ const Sidebar = ({
           </div>
         </div>
 
-        <div className="rounded-b-4xl flex flex-col h-117.5 bg-linear-to-b from-[#D28A4C]/10 to-[#D28A4C]/3">
+        <div className="hidden xl:flex flex-col rounded-b-4xl h-117.5 bg-linear-to-b from-[#D28A4C]/10 to-[#D28A4C]/3">
           <div className="p-6 flex flex-col gap-4">
             <h3 className="font-bold text-2xl leading-8 text-[#E89B55]">
               NFT EM DESTAQUE

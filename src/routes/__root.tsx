@@ -6,6 +6,7 @@ import '../styles.css'
 import CartProvider from '#/contexts/cart/cart-provider'
 import { useCurrentUser } from '#/hooks/use-auth'
 import { QueryClient } from '@tanstack/react-query'
+import MobileFilterProvider from '#/contexts/filter/mobile-filter-provider'
 
 interface MyRouterContext {
   queryClient: QueryClient
@@ -19,18 +20,20 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 function RootComponent() {
   return (
     <CartProvider>
-      <Outlet />
-      <TanStackDevtools
-        config={{
-          position: 'bottom-right',
-        }}
-        plugins={[
-          {
-            name: 'TanStack Router',
-            render: <TanStackRouterDevtoolsPanel />,
-          },
-        ]}
-      />
+      <MobileFilterProvider>
+        <Outlet />
+        <TanStackDevtools
+          config={{
+            position: 'bottom-right',
+          }}
+          plugins={[
+            {
+              name: 'TanStack Router',
+              render: <TanStackRouterDevtoolsPanel />,
+            },
+          ]}
+        />
+      </MobileFilterProvider>
     </CartProvider>
   )
 }

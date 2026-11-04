@@ -6,12 +6,14 @@ import NFTGrid from '../nfts/NFTGrid'
 import { NFTView } from '#/types/nft-view'
 import { Network } from '#/types/nfts'
 import { useSearch } from '@tanstack/react-router'
+import useMobileFilter from '#/hooks/use-mobileFilter'
+import { Sheet, SheetContent } from '../ui/sheet'
 
 const Products = () => {
   const { data: categories } = useCategories()
   const { data: nfts } = useNfts()
   const { search } = useSearch({ from: '/_app' })
-
+  const { isFilterOpen, setIsFilterOpen } = useMobileFilter()
   const [selectedCategory, setSelectedCategory] = useState<string | null>(
     'Arte digital',
   )
@@ -66,19 +68,38 @@ const Products = () => {
   const totalPages = Math.ceil(sortedNfts.length / pageSize)
 
   return (
-    <section className="flex gap-12 mt-22">
-      <Sidebar
-        nfts={nfts ?? []}
-        categories={categories ?? []}
-        selectedCategory={selectedCategory}
-        onCategoryChange={setSelectedCategory}
-        priceRange={priceRange}
-        onPriceRangeChange={setPriceRange}
-        appliedPriceRange={appliedPriceRange}
-        onApplyPrice={setAppliedPriceRange}
-        selectedNetwork={selectedNetwork}
-        onNetworkChange={setSelectedNetwork}
-      />
+    <section className="flex gap-12 mt-11 lg:mt-22">
+      <Sheet open={isFilterOpen} onOpenChange={setIsFilterOpen}>
+        <SheetContent className="border-l-[#D28A4C] bg-[#241612]">
+          <Sidebar
+            nfts={nfts ?? []}
+            categories={categories ?? []}
+            selectedCategory={selectedCategory}
+            onCategoryChange={setSelectedCategory}
+            priceRange={priceRange}
+            onPriceRangeChange={setPriceRange}
+            appliedPriceRange={appliedPriceRange}
+            onApplyPrice={setAppliedPriceRange}
+            selectedNetwork={selectedNetwork}
+            onNetworkChange={setSelectedNetwork}
+          />
+        </SheetContent>
+      </Sheet>
+
+      <div className="hidden xl:block">
+        <Sidebar
+          nfts={nfts ?? []}
+          categories={categories ?? []}
+          selectedCategory={selectedCategory}
+          onCategoryChange={setSelectedCategory}
+          priceRange={priceRange}
+          onPriceRangeChange={setPriceRange}
+          appliedPriceRange={appliedPriceRange}
+          onApplyPrice={setAppliedPriceRange}
+          selectedNetwork={selectedNetwork}
+          onNetworkChange={setSelectedNetwork}
+        />
+      </div>
       <NFTGrid
         selectedView={selectedView}
         onSelectedView={setSelectedView}

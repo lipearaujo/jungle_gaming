@@ -45,7 +45,7 @@ const Blog = () => {
 
   return (
     <div className="flex flex-col gap-10 mt-8 sm:mt-24">
-      <div className="flex flex-col justify-center items-center gap-3">
+      <div className="flex flex-col justify-center items-center gap-1 sm:gap-3">
         <h2 className="font-bold text-[28px] text-[#F5F1EB]">
           Diário da Cunhagem
         </h2>
@@ -55,7 +55,7 @@ const Blog = () => {
         </p>
       </div>
 
-      <div className="hidden sm:grid grid-cols-4">
+      <div className="hidden xl:grid grid-cols-4">
         {cards?.map((card, index) => (
           <Card
             key={card.title}
@@ -89,10 +89,13 @@ const Blog = () => {
         ))}
       </div>
 
-      <Carousel setApi={setCarouselApi} className="sm:hidden">
+      <Carousel setApi={setCarouselApi} className="xl:hidden">
         <CarouselContent className="mx-auto">
           {cards?.map((card, index) => (
-            <CarouselItem key={card.title} className="basis-5/5 pl-9">
+            <CarouselItem
+              key={card.title}
+              className="basis-5/5 md:flex md:justify-center pl-9"
+            >
               <Card
                 key={card.title}
                 className="w-67 p-0 rounded-t-xl rounded-b-none bg-[#241612]"
@@ -127,7 +130,7 @@ const Blog = () => {
         </CarouselContent>
       </Carousel>
 
-      <div className="sm:hidden flex gap-2 items-center justify-center">
+      <div className="xl:hidden flex gap-2 items-center justify-center max-sm:mb-12">
         {carouselApi?.scrollSnapList().map((_, index) => (
           <Button
             key={index}

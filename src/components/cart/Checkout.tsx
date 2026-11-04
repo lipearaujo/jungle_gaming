@@ -68,13 +68,13 @@ const Checkout = () => {
         </p>
       </div>
 
-      <div className="hidden sm:flex mt-8 gap-8">
+      <div className="hidden sm:flex justify-between mt-8 lg:gap-8 gap-3">
         <div className="flex flex-col gap-3">
           <p className="text-[17px] text-[#F5F1EB] leading-4 font-bold">
             Perfil do colecionador
           </p>
 
-          <div className="flex gap-6 mt-3">
+          <div className="flex max-xl:flex-col xl:gap-6 gap-3 mt-3">
             <div className="flex flex-col gap-3">
               <Label className="text-[15px] font-normal leading-4 text-[#F5F1EB]">
                 Nome de exibição <span className="text-[#F0805F]">*</span>

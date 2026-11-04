@@ -47,6 +47,8 @@ const CartProvider = ({ children }: Props) => {
             name: nft.name,
             price: nft.price,
             imageUrl: nft.imageUrl,
+            network: nft.network,
+            edition: nft.edition,
             quantity,
           },
         ]
