@@ -28,6 +28,10 @@ if (import.meta.env.DEV) {
 
   network.configure({ handlers })
   await network.enable()
+} else {
+  const { worker } = await import('./mocks/browser')
+
+  await worker.start()
 }
 
 const rootElement = document.getElementById('app')!
