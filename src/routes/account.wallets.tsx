@@ -30,14 +30,14 @@ function RouteComponent() {
         Perfil do colecionador
       </p>
 
-      <div className="flex gap-6 mt-3">
+      <div className="flex max-lg:flex-col gap-6 mt-3">
         <div className="flex flex-col gap-5">
           <Label className="text-[15px] font-normal leading-4 text-[#F5F1EB]">
             Nome de exibição <span className="text-[#F0805F]">*</span>
           </Label>
           <Input
             type="text"
-            className="border border-[#3F2319] bg-transparent w-[369.5px] h-10 focus-visible:ring-2 focus-visible:ring-[#D28A4C]"
+            className="border border-[#3F2319] bg-transparent w-full lg:w-[369.5px] h-10 focus-visible:ring-2 focus-visible:ring-[#D28A4C]"
           />
 
           <Label className="text-[15px] font-normal leading-4 text-[#F5F1EB]">
@@ -48,7 +48,7 @@ function RouteComponent() {
               items={selectInputItems}
               defaultValue={'Selecione uma rede'}
             >
-              <SelectTrigger className="w-[369.5px] h-10 bg-transparent border-none text-[#B39463]">
+              <SelectTrigger className="w-full lg:w-[369.5px] h-10 bg-transparent border-none text-[#B39463]">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -68,7 +68,7 @@ function RouteComponent() {
           </Label>
           <Input
             type="text"
-            className="border border-[#3F2319] bg-transparent w-[369.5px] h-10 placeholder:text-[#B39463] focus-visible:ring-2 focus-visible:ring-[#D28A4C]"
+            className="border border-[#3F2319] bg-transparent w-full lg:w-[369.5px] h-10 placeholder:text-[#B39463] focus-visible:ring-2 focus-visible:ring-[#D28A4C]"
             placeholder="Endereço 0x da carteira"
           />
 
@@ -77,7 +77,7 @@ function RouteComponent() {
           </Label>
           <div className="h-10 border border-[#3F2319] rounded-md">
             <Select defaultValue={'Selecione uma carteira'}>
-              <SelectTrigger className="w-[369.5px] h-full bg-transparent border-none text-[#B39463]">
+              <SelectTrigger className="w-full lg:w-[369.5px] h-full bg-transparent border-none text-[#B39463]">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -98,7 +98,7 @@ function RouteComponent() {
           </Label>
           <Input
             type="email"
-            className="border border-[#3F2319] bg-transparent w-[369.5px] h-10 focus-visible:ring-2 focus-visible:ring-[#D28A4C]"
+            className="border border-[#3F2319] bg-transparent w-full lg:w-[369.5px] h-10 focus-visible:ring-2 focus-visible:ring-[#D28A4C]"
           />
 
           <Button className="bg-[#D28A4C] w-32.75 h-10 hover:bg-[#D28A4C] cursor-pointer text-[#140D0A] font-bold text-sm leading-4 mt-3">
@@ -112,7 +112,7 @@ function RouteComponent() {
           </Label>
           <Input
             type="text"
-            className="border border-[#3F2319] bg-transparent w-[369.5px] h-10 focus-visible:ring-2 focus-visible:ring-[#D28A4C]"
+            className="border border-[#3F2319] bg-transparent w-full lg:w-[369.5px] h-10 focus-visible:ring-2 focus-visible:ring-[#D28A4C]"
           />
 
           <Label className="text-[15px] font-normal leading-4 text-[#F5F1EB]">
@@ -120,13 +120,13 @@ function RouteComponent() {
           </Label>
           <Input
             type="text"
-            className="border border-[#3F2319] bg-transparent w-[369.5px] h-10 focus-visible:ring-2 focus-visible:ring-[#D28A4C]"
+            className="border border-[#3F2319] bg-transparent w-full lg:w-[369.5px] h-10 focus-visible:ring-2 focus-visible:ring-[#D28A4C]"
           />
 
           <div className="text-[15px] leading-4 text-[#F5F1EB] p-2"></div>
           <Input
             type="text"
-            className="border border-[#3F2319] bg-transparent w-[369.5px] h-10 placeholder:text-[#B39463] focus-visible:ring-2 focus-visible:ring-[#D28A4C]"
+            className="border border-[#3F2319] bg-transparent w-full lg:w-[369.5px] h-10 placeholder:text-[#B39463] focus-visible:ring-2 focus-visible:ring-[#D28A4C]"
             placeholder="ENS ou carteira secundária (opcional)"
           />
 
@@ -135,7 +135,7 @@ function RouteComponent() {
           </Label>
           <Input
             type="text"
-            className="border border-[#3F2319] bg-transparent w-[369.5px] h-10 focus-visible:ring-2 focus-visible:ring-[#D28A4C]"
+            className="border border-[#3F2319] bg-transparent w-full lg:w-[369.5px] h-10 focus-visible:ring-2 focus-visible:ring-[#D28A4C]"
           />
 
           <Label className="text-[15px] font-normal leading-4 text-[#F5F1EB]">
@@ -163,13 +163,13 @@ function RouteComponent() {
         </div>
       </div>
 
-      <div className="flex flex-col gap-3 mt-3">
-        <div className="flex justify-between gap-3">
+      <div className="flex flex-col gap-3 mt-3 pb-20 lg:pb-0">
+        <div className="flex max-lg:flex-col justify-between gap-3">
           <p className="text-[#F5F1EB] font-bold text-lg leading-4">
             Carteira secundária
           </p>
 
-          <div className="flex 3">
+          <div className="flex">
             <RadioGroup className="w-fit">
               <div className="flex gap-3">
                 <RadioGroupItem
@@ -188,7 +188,7 @@ function RouteComponent() {
             </RadioGroup>
           </div>
         </div>
-        <p className="text-[#CFB28C] text-sm leading-3.5">
+        <p className="text-[#CFB28C] max-lg:text-center text-sm leading-3.5">
           Você ainda não adicionou uma carteira secundária.
         </p>
       </div>

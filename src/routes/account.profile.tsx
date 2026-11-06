@@ -37,14 +37,14 @@ function RouteComponent() {
         Perfil do colecionador
       </p>
 
-      <div className="flex gap-6 mt-3">
+      <div className="flex max-lg:flex-col gap-6 mt-3">
         <div className="flex flex-col gap-5">
           <Label className="text-[15px] font-normal leading-4 text-[#F5F1EB]">
             Nome de exibição <span className="text-[#F0805F]">*</span>
           </Label>
           <Input
             type="text"
-            className="border border-[#3F2319] bg-transparent w-[369.5px] h-10 focus-visible:ring-2 focus-visible:ring-[#D28A4C]"
+            className="border border-[#3F2319] bg-transparent w-full md:w-[369.5px] h-10 focus-visible:ring-2 focus-visible:ring-[#D28A4C]"
           />
 
           <Label className="text-[15px] font-normal leading-4 text-[#F5F1EB]">
@@ -52,7 +52,7 @@ function RouteComponent() {
           </Label>
           <Input
             type="email"
-            className="border border-[#3F2319] bg-transparent w-[369.5px] h-10 focus-visible:ring-2 focus-visible:ring-[#D28A4C]"
+            className="border border-[#3F2319] bg-transparent w-full lg:w-[369.5px] h-10 focus-visible:ring-2 focus-visible:ring-[#D28A4C]"
           />
 
           <Label className="text-[15px] font-normal leading-4 text-[#F5F1EB]">
@@ -60,7 +60,7 @@ function RouteComponent() {
           </Label>
           <Input
             type="text"
-            className="border border-[#3F2319] bg-transparent w-[369.5px] h-10 placeholder:text-[#B39463] focus-visible:ring-2 focus-visible:ring-[#D28A4C]"
+            className="border border-[#3F2319] bg-transparent w-full lg:w-[369.5px] h-10 placeholder:text-[#B39463] focus-visible:ring-2 focus-visible:ring-[#D28A4C]"
           />
 
           <div className="mt-6 flex flex-col gap-3">
@@ -166,7 +166,7 @@ function RouteComponent() {
           </Label>
           <Input
             type="text"
-            className="border border-[#3F2319] bg-transparent w-[369.5px] h-10 focus-visible:ring-2 focus-visible:ring-[#D28A4C]"
+            className="border border-[#3F2319] bg-transparent w-full lg:w-[369.5px] h-10 focus-visible:ring-2 focus-visible:ring-[#D28A4C]"
           />
 
           <Label className="text-[15px] font-normal leading-4 text-[#F5F1EB]">
@@ -202,7 +202,7 @@ function RouteComponent() {
           <Label className="text-[15px] font-normal leading-4 text-[#F5F1EB]">
             Avatar
           </Label>
-          <div className="flex items-center justify-start gap-3 ">
+          <div className="flex items-center justify-start gap-3 pb-20 lg:pb-0">
             <div className="bg-[#2F1D15] border border-[#3F2319] w-12.5 h-12.5 rounded-full flex items-center justify-center">
               <FileImage color="#D28A4C" />
             </div>
