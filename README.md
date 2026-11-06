@@ -9,8 +9,8 @@ O principal objetivo foi desenvolver uma aplicação completa no frontend, utili
 
 ## Demonstração
 
-- **Deploy:** [Acesse a aplicação](INSIRA_A_URL_DA_VERCEL)
-- **Repositório:** [GitHub](INSIRA_A_URL_DO_REPOSITORIO)
+- **Deploy:** [Acesse a aplicação](https://jungle-gaming-mauve.vercel.app/?search=)
+- **Repositório:** [GitHub](https://github.com/lipearaujo/jungle_gaming)
 
 ## Tecnologias
 
