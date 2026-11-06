@@ -1,200 +1,168 @@
 # jungle_gaming
 Repositório criado para o desafio frontend da Jungle Gaming
 
-TanStack
+# Kurio — NFT Marketplace
 
-(Configurando ambiente de desenvolvimento. Instalando dependencias Tanstack Query, Tanstack Route, Shadcn/ui, Axios, MSW)
+A **Kurio** é uma aplicação frontend de marketplace de NFTs, desenvolvida para simular a experiência de explorar, descobrir e adquirir ativos digitais. O projeto apresenta um catálogo de NFTs, filtros combinados, páginas de detalhes, autenticação simulada, gerenciamento de carrinho e fluxo de checkout.
 
-# Getting Started
+O principal objetivo foi desenvolver uma aplicação completa no frontend, utilizando ferramentas modernas do ecossistema React e boas práticas de organização, gerenciamento de estado, roteamento e comunicação com APIs.
 
-To run this application:
+## Demonstração
+
+- **Deploy:** [Acesse a aplicação](INSIRA_A_URL_DA_VERCEL)
+- **Repositório:** [GitHub](INSIRA_A_URL_DO_REPOSITORIO)
+
+## Tecnologias
+
+| Tecnologia | Utilização |
+|---|---|
+| React | Construção da interface |
+| TypeScript | Tipagem estática e segurança no desenvolvimento |
+| Vite | Build e ambiente de desenvolvimento |
+| Tailwind CSS | Estilização e responsividade |
+| shadcn/ui e Base UI | Componentes de interface |
+| TanStack Router | Roteamento e navegação |
+| TanStack Query | Gerenciamento de requisições e cache |
+| Axios | Comunicação HTTP |
+| MSW | Simulação da API e dos endpoints |
+| Zod | Validação de dados |
+| React Hook Form | Gerenciamento de formulários |
+
+## Funcionalidades
+
+### Catálogo de NFTs
+
+- Exibição de um catálogo com 162 NFTs distribuídos em 9 categorias.
+- Visualização de informações dos ativos, como nome, preço, imagem, coleção, criador e rede.
+- Filtros por categoria, faixa de preço, disponibilidade e rede.
+- Visualização de todos os itens, lançamentos recentes e NFTs em destaque.
+- Ordenação dos resultados por data de criação.
+- Paginação com 9 itens por página.
+
+### Detalhes do NFT
+
+- Página individual para cada NFT.
+- Exibição de descrição, coleção, criador, rede, endereço do contrato e atributos.
+- Informações sobre edição e disponibilidade do ativo.
+
+### Autenticação
+
+- Fluxos de cadastro e login.
+- Validação dos formulários.
+- Simulação de autenticação utilizando tokens.
+- Persistência do token da sessão no armazenamento local.
+- Recuperação e validação da sessão por meio do endpoint de usuário autenticado.
+- Proteção das rotas que exigem autenticação.
+
+### Carrinho de compras
+
+- Adição e remoção de NFTs.
+- Controle de quantidade dos itens.
+- Atualização dos valores conforme as quantidades selecionadas.
+- Persistência do carrinho no localStorage, permitindo manter os itens após atualizar a página.
+
+### Checkout e histórico de compras
+
+- Validação dos itens antes da finalização da compra.
+- Envio dos itens e respectivas quantidades para o endpoint de checkout.
+- Simulação da criação de compras.
+- Exibição do histórico de compras do usuário autenticado.
+
+### Interface responsiva
+
+- Layout adaptável a diferentes tamanhos de tela.
+- Componentes e elementos reorganizados conforme o espaço disponível.
+- Experiência de navegação para dispositivos móveis, tablets e desktops.
+
+## Arquitetura e decisões técnicas
+
+### Gerenciamento de requisições
+
+O TanStack Query é utilizado para gerenciar as requisições, cache e estado assíncrono dos dados.
+
+As operações de consulta e mutação são organizadas em hooks, permitindo separar a lógica de comunicação com a API dos componentes de interface.
+
+### Roteamento
+
+O TanStack Router gerencia as rotas da aplicação, incluindo páginas de listagem, detalhes dos NFTs, autenticação e áreas protegidas.
+
+### API simulada com MSW
+
+Como o projeto não possui um backend real, o Mock Service Worker (MSW) é utilizado para interceptar requisições HTTP e simular os endpoints da aplicação.
+
+Os dados dos NFTs são estáticos, enquanto operações como autenticação e compras são simuladas por handlers específicos.
+
+A configuração permite executar os mocks tanto durante o desenvolvimento quanto na versão de produção, utilizando o Service Worker do MSW.
+
+### Gerenciamento de estado
+
+O TanStack Query gerencia o estado assíncrono e os dados obtidos pela API.
+
+O Context API é utilizado para compartilhar o estado do carrinho entre diferentes componentes.
+
+O localStorage mantém informações necessárias entre atualizações da página, como os itens do carrinho e o token da sessão.
+
+### Validação
+
+O Zod é utilizado para validar estruturas de dados e formulários, garantindo que as informações enviadas para as operações respeitem os formatos esperados.
+
+## Como executar o projeto
+
+### Pré-requisitos
+
+- Node.js
+- npm
+
+### Instalação
+
+Clone o repositório:
+
+```bash
+git clone URL_DO_REPOSITORIO
+```
+
+Entre na pasta do projeto:
+
+```bash
+cd NOME_DA_PASTA
+```
+
+Instale as dependências:
 
 ```bash
 npm install
+```
+
+### Desenvolvimento
+
+```bash
 npm run dev
 ```
 
-# Building For Production
+A aplicação estará disponível em:
 
-To build this application for production:
+```text
+http://localhost:3000
+```
+
+### Build de produção
 
 ```bash
 npm run build
 ```
 
-## Styling
-
-This project uses [Tailwind CSS](https://tailwindcss.com/) for styling.
-
-### Removing Tailwind CSS
-
-If you prefer not to use Tailwind CSS:
-
-1. Remove the demo pages in `src/routes/demo/`
-2. Replace the Tailwind import in `src/styles.css` with your own styles
-3. Remove `tailwindcss()` from the plugins array in `vite.config.ts`
-4. Remove `@tailwindcss/vite` and `tailwindcss` from `package.json`
-
-## Linting & Formatting
-
-
-This project uses [eslint](https://eslint.org/) and [prettier](https://prettier.io/) for linting and formatting. Eslint is configured using [tanstack/eslint-config](https://tanstack.com/config/latest/docs/eslint). The following scripts are available:
+### Pré-visualização do build
 
 ```bash
-npm run lint
-npm run format
-npm run check
+npm run preview
 ```
 
+## Observações
 
+Este projeto é uma demonstração frontend. A API é simulada com MSW, não existe integração com uma blockchain ou carteira digital, e as compras não representam transações financeiras reais.
 
-## Routing
+A autenticação também é simulada e não deve ser utilizada como mecanismo de segurança em uma aplicação real.
 
-This project uses [TanStack Router](https://tanstack.com/router) with file-based routing. Routes are managed as files in `src/routes`.
+## Autor
 
-### Adding A Route
-
-To add a new route to your application just add a new file in the `./src/routes` directory.
-
-TanStack will automatically generate the content of the route file for you.
-
-Now that you have two routes you can use a `Link` component to navigate between them.
-
-### Adding Links
-
-To use SPA (Single Page Application) navigation you will need to import the `Link` component from `@tanstack/react-router`.
-
-```tsx
-import { Link } from "@tanstack/react-router";
-```
-
-Then anywhere in your JSX you can use it like so:
-
-```tsx
-<Link to="/about">About</Link>
-```
-
-This will create a link that will navigate to the `/about` route.
-
-More information on the `Link` component can be found in the [Link documentation](https://tanstack.com/router/v1/docs/framework/react/api/router/linkComponent).
-
-### Using A Layout
-
-In the File Based Routing setup the layout is located in `src/routes/__root.tsx`. Anything you add to the root route will appear in all the routes. The route content will appear in the JSX where you render `{children}` in the `shellComponent`.
-
-Here is an example layout that includes a header:
-
-```tsx
-import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
-
-export const Route = createRootRoute({
-  head: () => ({
-    meta: [
-      { charSet: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { title: 'My App' },
-    ],
-  }),
-  shellComponent: ({ children }) => (
-    <html lang="en">
-      <head>
-        <HeadContent />
-      </head>
-      <body>
-        <header>
-          <nav>
-            <Link to="/">Home</Link>
-            <Link to="/about">About</Link>
-          </nav>
-        </header>
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  ),
-})
-```
-
-More information on layouts can be found in the [Layouts documentation](https://tanstack.com/router/latest/docs/framework/react/guide/routing-concepts#layouts).
-
-## Server Functions
-
-TanStack Start provides server functions that allow you to write server-side code that seamlessly integrates with your client components.
-
-```tsx
-import { createServerFn } from '@tanstack/react-start'
-
-const getServerTime = createServerFn({
-  method: 'GET',
-}).handler(async () => {
-  return new Date().toISOString()
-})
-
-// Use in a component
-function MyComponent() {
-  const [time, setTime] = useState('')
-  
-  useEffect(() => {
-    getServerTime().then(setTime)
-  }, [])
-  
-  return <div>Server time: {time}</div>
-}
-```
-
-## API Routes
-
-You can create API routes by using the `server` property in your route definitions:
-
-```tsx
-import { createFileRoute } from '@tanstack/react-router'
-import { json } from '@tanstack/react-start'
-
-export const Route = createFileRoute('/api/hello')({
-  server: {
-    handlers: {
-      GET: () => json({ message: 'Hello, World!' }),
-    },
-  },
-})
-```
-
-## Data Fetching
-
-There are multiple ways to fetch data in your application. You can use TanStack Query to fetch data from a server. But you can also use the `loader` functionality built into TanStack Router to load the data for a route before it's rendered.
-
-For example:
-
-```tsx
-import { createFileRoute } from '@tanstack/react-router'
-
-export const Route = createFileRoute('/people')({
-  loader: async () => {
-    const response = await fetch('https://swapi.dev/api/people')
-    return response.json()
-  },
-  component: PeopleComponent,
-})
-
-function PeopleComponent() {
-  const data = Route.useLoaderData()
-  return (
-    <ul>
-      {data.results.map((person) => (
-        <li key={person.name}>{person.name}</li>
-      ))}
-    </ul>
-  )
-}
-```
-
-Loaders simplify your data fetching logic dramatically. Check out more information in the [Loader documentation](https://tanstack.com/router/latest/docs/framework/react/guide/data-loading#loader-parameters).
-
-
-
-# Learn More
-
-You can learn more about all of the offerings from TanStack in the [TanStack documentation](https://tanstack.com).
-
-For TanStack Start specific documentation, visit [TanStack Start](https://tanstack.com/start).
-(Configurando ambiente de desenvolvimento. Instalando dependencias Tanstack Query, Tanstack Route, Shadcn/ui, Axios, MSW)
+Desenvolvido como projeto de portfólio para demonstrar conhecimentos em desenvolvimento frontend com React, TypeScript e ferramentas modernas do ecossistema JavaScript.
